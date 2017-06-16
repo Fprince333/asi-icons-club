@@ -4,7 +4,9 @@ jQuery(document).ready(function() {
     const regHtmlContent = $j("#wpmem_restricted_msg").parent().children();
     removeRegForm(regHtmlContent);
     const regModal = $j('<div class="reg-modal"></div>');
-    regModal.html(regHtmlContent);
+    const regModalWrapper = $j('<div class="reg-modal-inner"></div>');
+    regModalWrapper.html(regHtmlContent);
+    regModal.append(regModalWrapper);
     regModal.prependTo(".wrapper");
   } else {
     console.log("Already logged in");
