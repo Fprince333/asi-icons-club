@@ -91,6 +91,6 @@ th.product-subtotal {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 200;
+  z-index: 2147483641;
   background-color: white;
 }
