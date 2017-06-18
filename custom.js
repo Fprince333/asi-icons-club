@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
     removeRegForm(regHtmlContent);
     const regModal = $j('<div class="reg-modal"></div>');
     const regModalWrapper = $j('<div class="reg-modal-inner"></div>');
+    $j(".wrapper").css("z-index", "2147483641");
     regModalWrapper.html(regHtmlContent);
     regModal.append(regModalWrapper);
     regModal.prependTo(".wrapper");
