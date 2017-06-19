@@ -119,3 +119,22 @@ th.product-subtotal {
     top: 25px;
   }
 }
+
+.hidden {
+    display: none;
+}
+
+.button_div {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.button_div span {
+    width: 33%;
+    cursor: pointer;
+}
+
+form span {
+    cursor: pointer;
+}
