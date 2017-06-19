@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
     $j("#register").on("click", toggleForms);
     $j("#login").on("click", toggleForms);
   } else {
-    console.log("Already logged in");
+    console.log("Already logged in, guy");
   }
 
   function removeRegForm(html) {
