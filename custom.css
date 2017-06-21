@@ -138,3 +138,23 @@ th.product-subtotal {
 form span {
     cursor: pointer;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
+.flex-row .wpb_wrapper  {
+    display: flex;
+    justify-content: center;
+}
+
+.block .wpb_wrapper{
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .block {
+        width: 45%;
+    }
+}
+
