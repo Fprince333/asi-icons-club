@@ -162,3 +162,18 @@ form span {
     max-width: 115px;
 }
 
+.footer-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.footer-menu li:not(:last-child) {
+    margin: 15px;
+    border-right: 1px solid grey;
+    padding-right: 15px;
+    line-height: 1em;
+}
+
