@@ -144,80 +144,11 @@ form span {
     line-height: 1em;
 }
 
-.form-icon img {
-    width: 210px;
-}
-
-.form-text {
-    display: flex;
-    justify-content: center;
-}
-
-.form-text ul {
-    line-height: 2em;
-}
-
-.form-body {
-    max-width: 800px !important;
-    margin: 0 auto !important;
-    color: white;
-}
-
-.form-body input {
-    color: black;
-}
-
-.display-inline {
-    display: inline;
-}
-
-ul > .display-inline {
-    float: left;
-    width: 50%;
-}
-
-ul > .display-inline ~ .display-inline {
-    float: none;
-}
-
-body .gform_wrapper div.validation_error {
-    background-color: #e1a445;
-}
-
-.gform_wrapper li.gfield.gfield_error, 
-.gform_wrapper li.gfield.gfield_error.gfield_contains_required.gfield_creditcard_warning {
-    background-color: transparent !important;
-}
-
-.gform_confirmation_message_5, 
-.gform_confirmation_message {
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 100px;
-}
-
-body .gform_wrapper input[type=submit] {
-    border: 2px solid white;
-    color: white;
-}
-
-body .gform_wrapper input[type=submit]:hover {
-    background-color: white;
-    border-color: white;
-    color: black;
-}
-
-.gform_footer {
-    text-align: center;
-}
-
-@media only screen and (min-width: 1000px) {
-    body.membership-form .wrapper_inner {
-        width: 1050px !important;
-    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Helvetica', sans-serif;
 }
