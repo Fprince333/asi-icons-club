@@ -44,11 +44,6 @@ nav.main_menu>ul>li>a {
 padding: 10px;
 }
 
-.producttext p {
-font-size: 14px;
-    line-height: 16px;
-}
-
 .smaller p, ul {
 font-size: 14px;
     line-height: 18px;
@@ -61,6 +56,10 @@ p.product.woocommerce.add_to_cart_inline {
 
 span.woocommerce-Price-amount.amount {
     display: none;
+}
+
+.shopping_cart_dropdown span.total {
+  display: none;
 }
 
 tfoot {
@@ -144,11 +143,33 @@ form span {
     line-height: 1em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Helvetica', sans-serif;
+.footer-menu a {
+  font-size: 1.5em;
+}
+
+.shopping_cart_dropdown ul li a {
+    color: #ffffff !important;
+}
+
+sup {
+font-size: 0.5em;
+vertical-align: super;
+}
+
+.shopping-bag {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 2px 2px 0 0;
+  -webkit-border-radius: 2px 2px 0 0;
+  -moz-border-radius: 2px 2px 0 0;
+  -o-border-radius: 2px 2px 0 0;
+  -ms-border-radius: 2px 2px 0 0;
+  position: relative;
+  background-image: url(img/header_shopping_bag_white@2x.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 15px;
+  height: 18px;
+  background-size: contain;
+  margin-left: 10px;
 }

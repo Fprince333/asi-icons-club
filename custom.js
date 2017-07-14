@@ -1,42 +1,15 @@
-// Pardot form handler
-jQuery(document).ready(function($) {
-  // set the pardot form handler url and form element id
-  const partdotFormHandlerURL =
-    "http://www2.archsystems.com/l/67312/2017-06-26/9zsvcx";
-  const formElementID = "um_form_memberregistration";
-  const firstName = $("#um_field_3_memberregistration").val();
-  const lastName = $("#um_field_4_memberregistration").val();
-  const title = $("#um_field_6_memberregistration").val();
-  const company = $("#um_field_8_memberregistration").val();
-  const email = $("#um_field_9_memberregistration").val();
-
-  $("body").append(
-    '<iframe id="pardot-form-handler" height="0" width="0" style="position:absolute; left:-100000px; top:-100000px" src="javascript:false;"></iframe>'
-  );
-  $("#" + formElementID).attr(
-    "action",
-    "javascript:postToPardot('" + $("#" + formElementID).attr("action") + "')"
-  );
+$j(document).ready(function() {
+  const hutchQuote = $j(".yt-hutchinson");
+  if (hutchQuote.length > 0) {
+    const icon = hutchQuote.find(".mpc-icon");
+    icon.css("cursor", "pointer");
+    icon.on("click", playYouTubeVideo);
+  }
 });
 
-function postToPardot(formAction) {
-  $("#pardot-form-handler").load(function() {
-    $("#" + formElementID).attr("action", formAction);
-    $("#" + formElementID).submit();
-  });
-  $("#pardot-form-handler").attr(
-    "src",
-    partdotFormHandlerURL +
-      "?" +
-      "email=" +
-      email +
-      "&first_name=" +
-      firstName +
-      "&last_name=" +
-      lastName +
-      "&title=" +
-      title +
-      "&company=" +
-      company
-  );
+function playYouTubeVideo() {
+  const youTubeIframe = `<iframe width="620" height="480" src="https://www.youtube.com/embed/0c0stsGBtnM?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+  $j(".yt-hutchinson").find(".mpc-icon").css("border-radius", "0");
+  $j(".yt-hutchinson").find(".mpc-icon").css("border", "none");
+  $j(".yt-hutchinson").find(".mpc-icon").html(youTubeIframe);
 }
