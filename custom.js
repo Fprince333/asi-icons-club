@@ -4,8 +4,11 @@ $j(document).ready(function() {
   const cobenQuote = $j(".yt-coben");
   const fileDownload = $j(".download-file");
   const loginLabel = $j(".tml-user-login-wrap");
+  const isLoginPath =
+    window.location.pathname.indexOf("join") > -1 ||
+    window.location.pathname.indexOf("login") > -1;
 
-  if (loginLabel) {
+  if (loginLabel && isLoginPath) {
     loginLabel.find("label").text("Email");
     $j(".tml-action-links").find("li")[0].remove();
     $j(".tml-rememberme-wrap").find("label").text("");
