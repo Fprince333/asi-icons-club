@@ -2,6 +2,20 @@ $j(document).ready(function() {
   const hutchQuote = $j(".yt-hutchinson");
   const daimiQuote = $j(".yt-daimi");
   const cobenQuote = $j(".yt-coben");
+  const fileDownload = $j(".download-file");
+  const loginLabel = $j(".tml-user-login-wrap");
+
+  if (loginLabel) {
+    loginLabel.find("label").text("Email");
+    $j(".tml-action-links").find("li")[0].remove();
+    $j(".tml-rememberme-wrap").find("label").text("");
+    $j(".tml-rememberme-wrap").append("Remember me");
+    $j(".tml-rememberme-wrap").css("display", "inline");
+    $j(".tml-rememberme-wrap").css("padding-left", "15px");
+    $j(".tml-rememberme-wrap").css("padding-top", "4px");
+    $j(".tml-action-links").find("li").css("font-size", "16px");
+    $j(".tml-action-links").find("li").css("margin-top", "15px");
+  }
 
   if (hutchQuote.length > 0) {
     const icon = hutchQuote.find(".mpc-icon");
@@ -19,6 +33,9 @@ $j(document).ready(function() {
     const icon = cobenQuote.find(".mpc-icon");
     icon.css("cursor", "pointer");
     icon.on("click", linkToYouTubeVideoOfCoben);
+  }
+  if (fileDownload.length > 0) {
+    fileDownload.attr("download", "");
   }
 });
 
