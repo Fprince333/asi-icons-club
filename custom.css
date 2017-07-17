@@ -173,3 +173,71 @@ vertical-align: super;
   background-size: contain;
   margin-left: 10px;
 }
+
+mark {
+background-color: #d88c2b;
+}
+
+.gform_drop_area {
+border: 1px dashed black !important;
+color: black !important;
+}
+
+#gform_browse_button_3_3 {
+padding: 3px 12px !important;
+}
+
+.gform_footer {
+text-align: center;
+}
+
+input[type=email], 
+input[type=number], 
+input[type=password], 
+input[type=tel],
+input[type=text], 
+input[type=url], 
+textarea {
+line-height: 2em !important;
+}
+
+.tml-rememberme-wrap {
+width: 25px;
+margin: 20px 100px;
+position: relative;
+}
+
+.tml-rememberme-wrap label {
+	cursor: pointer;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 0;
+  	left: 0;
+	background: #eee;
+	border:1px solid #ddd;
+}
+
+.tml-rememberme-wrap label:after {
+opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 6px;
+	left: 7px;
+	border: 3px solid #333;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+.tml-rememberme-wrap label:hover::after {
+opacity: 0.5;
+}
+
+.tml-rememberme-wrap input[type=checkbox]:checked + label:after {
+opacity: 1;
+}
