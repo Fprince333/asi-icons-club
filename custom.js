@@ -7,6 +7,13 @@ $j(document).ready(function() {
   const isLoginPath =
     window.location.pathname.indexOf("join") > -1 ||
     window.location.pathname.indexOf("login") > -1;
+  const hasGalleryImages = $j("article.mix").length > 0;
+
+  if (hasGalleryImages) {
+    setTimeout(function() {
+      $j("article.mix:gt(7)").hide();
+    }, 3000);
+  }
 
   if (loginLabel && isLoginPath) {
     loginLabel.find("label").text("Email");
