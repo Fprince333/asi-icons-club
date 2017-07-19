@@ -1,3 +1,13 @@
+var waitForEl = function(selector, callback) {
+  if (jQuery(selector).length) {
+    callback();
+  } else {
+    setTimeout(function() {
+      waitForEl(selector, callback);
+    }, 100);
+  }
+};
+
 $j(document).ready(function() {
   const hutchQuote = $j(".yt-hutchinson");
   const daimiQuote = $j(".yt-daimi");
@@ -8,10 +18,10 @@ $j(document).ready(function() {
     window.location.pathname.indexOf("join") > -1 ||
     window.location.pathname.indexOf("login") > -1;
   const hasGalleryImages = $j("article.mix").length > 0;
-
   const $showMoreButton = `<div class="portfolio_paging"><span rel="8" class="load_more"><a href="#" id="show-more">Show more</a></span></div>`;
 
   if (hasGalleryImages) {
+    $j("a.lightbox.qbutton").on("click", populateLightboxText);
     setTimeout(function() {
       $j("article.mix:gt(7)").hide();
       $j(".projects_holder").after($showMoreButton);
@@ -52,6 +62,22 @@ $j(document).ready(function() {
     fileDownload.attr("download", "");
   }
 });
+
+function populateLightboxText() {
+  const linkToPortfolioItem = $j(this)
+    .parents(".image_holder")
+    .find(".portfolio_link_for_touch")[0].href;
+  waitForEl("#fullResImage", function() {
+    let textContainer = `<div class="lightboxText"></div>`;
+    $j.get(linkToPortfolioItem, function(data) {
+      let description = $j(textContainer)
+        .hide()
+        .append($j(data).find(".info.portfolio_content").html());
+      $j("#fullResImage").parent().append(description);
+      description.show("slow");
+    });
+  });
+}
 
 function showMore(e) {
   e.preventDefault();

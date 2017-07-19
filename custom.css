@@ -254,3 +254,16 @@ body .gform_wrapper input[type=reset]:hover {
 .mpc-callout__description p {
     margin-bottom: 10px;
 }
+
+.lightboxText {
+    position: absolute;
+    bottom: 44px;
+    padding: 10px 30px;
+    max-width: 900px;
+    width: 91%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.lightboxText p {
+    color: white;
+} 
