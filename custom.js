@@ -9,9 +9,13 @@ $j(document).ready(function() {
     window.location.pathname.indexOf("login") > -1;
   const hasGalleryImages = $j("article.mix").length > 0;
 
+  const $showMoreButton = `<div class="portfolio_paging"><span rel="8" class="load_more"><a href="#" id="show-more">Show more</a></span></div>`;
+
   if (hasGalleryImages) {
     setTimeout(function() {
       $j("article.mix:gt(7)").hide();
+      $j(".projects_holder").after($showMoreButton);
+      $j("#show-more").on("click", showMore);
     }, 3000);
   }
 
@@ -48,6 +52,12 @@ $j(document).ready(function() {
     fileDownload.attr("download", "");
   }
 });
+
+function showMore(e) {
+  e.preventDefault();
+  $j(this).hide();
+  $j("article.mix:gt(7)").show();
+}
 
 function playYouTubeVideo() {
   const youTubeIframe = `<iframe width="620" height="480" src="https://www.youtube.com/embed/0c0stsGBtnM?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
