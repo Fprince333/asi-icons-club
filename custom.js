@@ -19,13 +19,45 @@ $j(document).ready(function() {
     window.location.pathname.indexOf("login") > -1;
   const hasGalleryImages = $j("article.mix").length > 0;
   const $showMoreButton = `<div class="portfolio_paging"><span rel="8" class="load_more"><a href="#" id="show-more">Show more</a></span></div>`;
+  const hasBillingFields = $j("#customer_details").length > 0;
+  const isAddressPath = window.location.pathname.indexOf("edit-address") > -1;
+  const isOrderPath =
+    window.location.pathname.indexOf("order-received") > -1 ||
+    window.location.pathname.indexOf("view-order");
+  const isInspirationPath = window.location.hash.indexOf("inspiration") > -1;
+
+  $j("a:contains('billing addresses')").text("shipping address");
+  $j(".post_info").hide();
+  $j(".entry_date ").hide();
+  $j(".post_more").find("a").text("View");
+
+  if (isOrderPath) {
+    $j(".woocommerce-column--billing-address").hide();
+    $j(".product-total").hide();
+    $j(".total").hide();
+  }
+
+  if (isAddressPath) {
+    $j($j(".address")[0]).hide();
+    $j(".col-2").css("width", "100%");
+  }
+
+  if (hasBillingFields) {
+    $j("<h3>Shipping Details</h3>").insertAfter("#ship-to-different-address");
+    $j(".col-1").hide();
+  }
 
   if (hasGalleryImages) {
     $j("a.lightbox.qbutton").on("click", populateLightboxText);
+    $j(".filter").on("click", function() {
+      $j("#show-more").hide();
+    });
     setTimeout(function() {
-      $j("article.mix:gt(7)").hide();
-      $j(".projects_holder").after($showMoreButton);
-      $j("#show-more").on("click", showMore);
+      if (!isInspirationPath) {
+        $j("article.mix:gt(7)").hide();
+        $j(".projects_holder").after($showMoreButton);
+        $j("#show-more").on("click", showMore);
+      }
     }, 3000);
   }
 
