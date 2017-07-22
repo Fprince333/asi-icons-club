@@ -1,14 +1,14 @@
-var waitForEl = function(selector, callback) {
+var waitForEl = function (selector, callback) {
   if (jQuery(selector).length) {
     callback();
   } else {
-    setTimeout(function() {
+    setTimeout(function () {
       waitForEl(selector, callback);
     }, 100);
   }
 };
 
-$j(document).ready(function() {
+$j(document).ready(function () {
   const hutchQuote = $j(".yt-hutchinson");
   const daimiQuote = $j(".yt-daimi");
   const cobenQuote = $j(".yt-coben");
@@ -29,7 +29,7 @@ $j(document).ready(function() {
   $j("a:contains('billing addresses')").text("shipping address");
   $j(".post_info").hide();
   $j(".entry_date ").hide();
-  $j(".post_more").find("a").text("View");
+  $j('.post_more').find('a').text("View")
 
   if (isOrderPath) {
     $j(".woocommerce-column--billing-address").hide();
@@ -49,10 +49,10 @@ $j(document).ready(function() {
 
   if (hasGalleryImages) {
     $j("a.lightbox.qbutton").on("click", populateLightboxText);
-    $j(".filter").on("click", function() {
+    $j(".filter").on("click", function () {
       $j("#show-more").hide();
     });
-    setTimeout(function() {
+    setTimeout(function () {
       if (!isInspirationPath) {
         $j("article.mix:gt(7)").hide();
         $j(".projects_holder").after($showMoreButton);
@@ -99,9 +99,9 @@ function populateLightboxText() {
   const linkToPortfolioItem = $j(this)
     .parents(".image_holder")
     .find(".portfolio_link_for_touch")[0].href;
-  waitForEl("#fullResImage", function() {
+  waitForEl("#fullResImage", function () {
     let textContainer = `<div class="lightboxText"></div>`;
-    $j.get(linkToPortfolioItem, function(data) {
+    $j.get(linkToPortfolioItem, function (data) {
       let description = $j(textContainer)
         .hide()
         .append($j(data).find(".info.portfolio_content").html());
