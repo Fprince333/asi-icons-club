@@ -25,11 +25,21 @@ $j(document).ready(function () {
     window.location.pathname.indexOf("order-received") > -1 ||
     window.location.pathname.indexOf("view-order");
   const isInspirationPath = window.location.hash.indexOf("inspiration") > -1;
+  const isFormPath = window.location.pathname.indexOf("register") > -1;
 
   $j("a:contains('billing addresses')").text("shipping address");
   $j(".post_info").hide();
   $j(".entry_date ").hide();
-  $j('.post_more').find('a').text("View")
+  $j('.post_more').find('a').text("View");
+
+  if (isFormPath) {
+    $j('form').submit(function () {
+      $j('.form-body').hide();
+      $j('.form-footnote').hide();
+      $j('.form-headline').find("span").text("Please Wait...");
+      $j('.form-text').find(".wpb_wrapper").text("We're registering your info for Icon status.").css("color", "white");
+    })
+  }
 
   if (isOrderPath) {
     $j(".woocommerce-column--billing-address").hide();
