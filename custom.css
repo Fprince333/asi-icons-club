@@ -109,6 +109,12 @@ form span {
     cursor: pointer;
 }
 
+.clickable p:hover,
+.clickable p:focus,
+.clickable p:active {
+    color: #d88c2b;
+}
+
 .flex-row .wpb_wrapper  {
     display: flex;
     justify-content: center;
@@ -345,4 +351,8 @@ h2 {
 
 .blog_holder {
 margin-top: 100px;
+}
+
+.shopping_cart_header .header_cart span {
+    color: white;
 }
