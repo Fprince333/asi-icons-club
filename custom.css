@@ -427,3 +427,27 @@ margin-top: 100px;
         width: 100px;
     }
 }
+
+.fa-stack {
+    width: 3em !important;
+    height: 3em !important;
+    line-height: 3em !important;
+}
+
+.q_social_icon_holder .fa-stack i:last-child, 
+.q_social_icon_holder .fa-stack span {
+    font-size: 1.3em;
+}
+
+.qode_icon_font_awesome:hover {
+    color: #eabf90 !important;
+}
+
+.q_social_icon_holder.circle_social .fa-stack:hover, 
+.q_social_icon_holder.square_social .fa-stack:hover {
+    border-color: #eabf90 ;
+}
+
+.q_social_icon_holder .fa-stack {
+    border: 2px solid #e3e3e3;
+}
