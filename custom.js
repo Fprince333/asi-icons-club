@@ -26,11 +26,16 @@ $j(document).ready(function () {
     window.location.pathname.indexOf("view-order");
   const isInspirationPath = window.location.hash.indexOf("inspiration") > -1;
   const isFormPath = window.location.pathname.indexOf("register") > -1;
+  const isAccountPath = window.location.pathname.indexOf("my-account") > -1;
 
   $j("a:contains('billing addresses')").text("shipping address");
   $j(".post_info").hide();
   $j(".entry_date ").hide();
   $j('.post_more').find('a').text("View");
+
+  if (isAccountPath) {
+    $j($j('.woocommerce-MyAccount-content').find('p')[0]).hide();
+  }
 
   if (isFormPath) {
     $j('form').submit(function () {
