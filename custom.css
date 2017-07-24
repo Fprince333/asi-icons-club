@@ -288,7 +288,7 @@ h1 {
 }
 
 h2 {
-  font-size: 4vw;
+  font-size: 3vw;
 }
 
 @media screen and (min-width: 768px) { 
@@ -355,4 +355,75 @@ margin-top: 100px;
 
 .shopping_cart_header .header_cart span {
     color: white;
+}
+
+@media screen and (width: 768px) {
+    .wpb_single_image img {
+        height: 277px !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 999px) { 
+
+    .mpc-callout__description p {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    h3.mpc-callout__heading  {
+        font-size: 13px !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    .mpc-callout__icon-wrap img {
+        width: 68px;
+    }
+    .mpc-button__title {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+    .mpc-callout {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1199px) {
+    .mpc-callout__description p {
+        font-size: 15px;
+    }
+    .mpc-callout__icon-wrap img {
+        width: 75px;
+    }
+    .mpc-callout__heading {
+        font-size: 16px !important;
+    }
+    .mpc-button__title {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+    .mpc-button{
+        margin-top: 15px !important;
+    }
+    .filter_holder ul li span {
+        font-size: 20px !important;
+        line-height: 2em !important;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+    .filter_holder ul li span {
+        font-size: 20px !important;
+        line-height: 2em !important;
+    }
+    .mpc-callout__heading {
+        font-size: 18px !important;
+    }
+    .mpc-button{
+        margin-top: 20px !important;
+    }
+    .mpc-callout__icon-wrap img {
+        width: 100px;
+    }
 }
