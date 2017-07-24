@@ -142,8 +142,11 @@ form span {
     padding: 15px;
 }
 
+.footer-menu li {
+    margin: 8px;
+}
+
 .footer-menu li:not(:last-child) {
-    margin: 15px;
     border-right: 1px solid grey;
     padding-right: 15px;
     line-height: 1em;
@@ -350,7 +353,7 @@ h2 {
 }
 
 .blog_holder {
-margin-top: 100px;
+    margin-top: 100px;
 }
 
 .shopping_cart_header .header_cart span {
@@ -440,7 +443,7 @@ margin-top: 100px;
 }
 
 .qode_icon_font_awesome:hover {
-    color: #eabf90 !important;
+    color: #eabf90 !important; 
 }
 
 .q_social_icon_holder.circle_social .fa-stack:hover, 

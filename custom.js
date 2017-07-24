@@ -1,14 +1,14 @@
-var waitForEl = function (selector, callback) {
+var waitForEl = function(selector, callback) {
   if (jQuery(selector).length) {
     callback();
   } else {
-    setTimeout(function () {
+    setTimeout(function() {
       waitForEl(selector, callback);
     }, 100);
   }
 };
 
-$j(document).ready(function () {
+$j(document).ready(function() {
   const hutchQuote = $j(".yt-hutchinson");
   const daimiQuote = $j(".yt-daimi");
   const cobenQuote = $j(".yt-coben");
@@ -17,6 +17,7 @@ $j(document).ready(function () {
   const isLoginPath =
     window.location.pathname.indexOf("join") > -1 ||
     window.location.pathname.indexOf("login") > -1;
+  const isPasswordPath = window.location.pathname.indexOf("lostpassword") > -1;
   const hasGalleryImages = $j("article.mix").length > 0;
   const $showMoreButton = `<div class="portfolio_paging"><span rel="8" class="load_more"><a href="#" id="show-more">Show more</a></span></div>`;
   const hasBillingFields = $j("#customer_details").length > 0;
@@ -31,19 +32,30 @@ $j(document).ready(function () {
   $j("a:contains('billing addresses')").text("shipping address");
   $j(".post_info").hide();
   $j(".entry_date ").hide();
-  $j('.post_more').find('a').text("View");
+  $j(".post_more").find("a").text("View");
 
   if (isAccountPath) {
-    $j($j('.woocommerce-MyAccount-content').find('p')[0]).hide();
+    $j($j(".woocommerce-MyAccount-content").find("p")[0]).hide();
+  }
+
+  if (isPasswordPath) {
+    $j(".tml-action-links").find("li")[1].remove();
+    $j(".tml-user-login-wrap").find("label").text("Email");
+    $j(".message").text(
+      "Please enter your email address. You will receive a link to create a new password via email."
+    );
   }
 
   if (isFormPath) {
-    $j('form').submit(function () {
-      $j('.form-body').hide();
-      $j('.form-footnote').hide();
-      $j('.form-headline').find("span").text("Please Wait...");
-      $j('.form-text').find(".wpb_wrapper").text("We're registering your info for Icon status.").css("color", "white");
-    })
+    $j("form").submit(function() {
+      $j(".form-body").hide();
+      $j(".form-footnote").hide();
+      $j(".form-headline").find("span").text("Please Wait...");
+      $j(".form-text")
+        .find(".wpb_wrapper")
+        .text("We're registering your info for Icon status.")
+        .css("color", "white");
+    });
   }
 
   if (isOrderPath) {
@@ -64,16 +76,24 @@ $j(document).ready(function () {
 
   if (hasGalleryImages) {
     $j("a.lightbox.qbutton").on("click", populateLightboxText);
-    $j(".filter").on("click", function () {
+    $j(".filter").on("click", function() {
       $j("#show-more").hide();
     });
-    setTimeout(function () {
+
+    let addShowMoreButton = setInterval(function() {
       if (!isInspirationPath) {
-        $j("article.mix:gt(7)").hide();
-        $j(".projects_holder").after($showMoreButton);
-        $j("#show-more").on("click", showMore);
+        if (
+          $j("article.mix")[$j("article.mix").length - 1].style[
+            "visibility"
+          ] === "visible"
+        ) {
+          $j("article.mix:gt(7)").hide();
+          $j(".projects_holder").after($showMoreButton);
+          $j("#show-more").on("click", showMore);
+          clearInterval(addShowMoreButton);
+        }
       }
-    }, 3000);
+    }, 300);
   }
 
   if (loginLabel && isLoginPath) {
@@ -114,15 +134,58 @@ function populateLightboxText() {
   const linkToPortfolioItem = $j(this)
     .parents(".image_holder")
     .find(".portfolio_link_for_touch")[0].href;
-  waitForEl("#fullResImage", function () {
+  waitForEl("#fullResImage", function() {
     let textContainer = `<div class="lightboxText"></div>`;
-    $j.get(linkToPortfolioItem, function (data) {
+    $j.get(linkToPortfolioItem, function(data) {
       let description = $j(textContainer)
         .hide()
         .append($j(data).find(".info.portfolio_content").html());
       $j("#fullResImage").parent().append(description);
       description.show("slow");
+      let currentSlide = parseInt(
+        $j(".currentTextHolder").text().split("/")[0]
+      );
+      $j(".pp_next").on(
+        "click",
+        { slide: currentSlide, type: "next" },
+        populateNextSlideText
+      );
+      $j(".pp_previous").on(
+        "click",
+        { slide: currentSlide, type: "previous" },
+        populateNextSlideText
+      );
+      $j(".pp_arrow_next").on(
+        "click",
+        { slide: currentSlide, type: "next" },
+        populateNextSlideText
+      );
+      $j(".pp_arrow_previous").on(
+        "click",
+        { slide: currentSlide, type: "previous" },
+        populateNextSlideText
+      );
     });
+  });
+}
+
+function populateNextSlideText(e) {
+  let slideNumber = parseInt(
+    $j(this).parents(".pp_fade").find(".currentTextHolder").text().split("/")[0]
+  );
+  let linkToNextPortfolioItem = "";
+  if (e.data.type === "next") {
+    linkToNextPortfolioItem = `http://iconsclub.archsystems.com/projects/${slideNumber + 1}/`;
+  } else if (e.data.type === "previous") {
+    linkToNextPortfolioItem = `http://iconsclub.archsystems.com/projects/${slideNumber - 1}/`;
+  }
+  let textContainer = `<div class="lightboxText"></div>`;
+  $j.get(linkToNextPortfolioItem, function(data) {
+    let description = $j(textContainer)
+      .hide()
+      .append($j(data).find(".info.portfolio_content").html());
+    $j("#fullResImage").parent().append(description);
+    description.show("slow");
   });
 }
 
