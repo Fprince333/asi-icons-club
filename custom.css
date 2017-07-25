@@ -266,11 +266,24 @@ body .gform_wrapper input[type=reset]:hover {
 
 .lightboxText {
     position: absolute;
-    bottom: 44px;
+    bottom: 0;
     padding: 10px 30px;
     max-width: 900px;
-    width: 91%;
+    width: 92%;
     background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (min-width: 768px) { 
+    .lightboxText {
+        width: 85%;
+        bottom: 44px;
+    }
+}
+
+@media screen and (min-width: 900px) { 
+    .lightboxText {
+        width: 91%;
+    }
 }
 
 .lightboxText p {
