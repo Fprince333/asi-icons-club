@@ -40,6 +40,10 @@ $j(document).ready(function() {
   $j(".entry_date ").hide();
   $j(".post_more").find("a").text("View");
 
+  if ($j(".cart_list").find("li").text() === "No products in the cart.") {
+    $j(".cart_list").find("li").text("No requests made.");
+  }
+
   $j("#gform_3").submit(function() {
     localStorage.setItem("form-submitted", true);
   });
