@@ -28,11 +28,46 @@ $j(document).ready(function() {
   const isInspirationPath = window.location.hash.indexOf("inspiration") > -1;
   const isFormPath = window.location.pathname.indexOf("register") > -1;
   const isAccountPath = window.location.pathname.indexOf("my-account") > -1;
+  const showHomeFormSubmitMessage =
+    localStorage.getItem("form-submitted") == "true" &&
+    window.location.pathname === "/";
+  const showFormSubmitMessage =
+    localStorage.getItem("form-submitted") == "true" &&
+    window.location.pathname !== "/";
 
   $j("a:contains('billing addresses')").text("shipping address");
   $j(".post_info").hide();
   $j(".entry_date ").hide();
   $j(".post_more").find("a").text("View");
+
+  $j("#gform_3").submit(function() {
+    localStorage.setItem("form-submitted", true);
+  });
+
+  $j("#gform_8").submit(function() {
+    localStorage.setItem("form-submitted", true);
+  });
+
+  $j("#gform_8").submit(function() {
+    localStorage.setItem("form-submitted", true);
+  });
+
+  if (showFormSubmitMessage) {
+    setTimeout(function() {
+      restoreForm();
+    }, 15000);
+    const successMessage = `<div data-id="mpc_callout-625977837bf2f07" class="mpc-callout mpc-callout--style_2 mpc-inited" style="opacity: 1;"><p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class="flex-row-center"><i class="mpc-icon-part mpc-regular mpc-transition"><img width="260" height="263" src="http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png" class="attachment-full" alt=""></i></div></div>`;
+    $j($j(".form-container").find(".wpb_wrapper")[0]).html(successMessage);
+  }
+
+  if (showHomeFormSubmitMessage) {
+    setTimeout(function() {
+      restoreForm();
+    }, 15000);
+    $j(".mpc-callout--style_2").html(
+      "<p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class='flex-row-center'><i class='mpc-icon-part mpc-regular mpc-transition'><img width='260' height='263' src='http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png' class='attachment-full' alt=''></i></div>"
+    );
+  }
 
   if (isAccountPath) {
     $j($j(".woocommerce-MyAccount-content").find("p")[0]).hide();
@@ -129,6 +164,10 @@ $j(document).ready(function() {
     fileDownload.attr("download", "");
   }
 });
+
+function restoreForm() {
+  localStorage.removeItem("form-submitted");
+}
 
 function populateLightboxText() {
   const linkToPortfolioItem = $j(this)

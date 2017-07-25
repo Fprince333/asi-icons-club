@@ -454,3 +454,72 @@ h2 {
 .q_social_icon_holder .fa-stack {
     border: 2px solid #e3e3e3;
 }
+
+
+.flex-row-center {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.flex-row-center i {
+    position: absolute;
+    bottom: 10px;
+}
+
+.mpc-callout--style_2 {
+    min-height: 260px;
+}
+
+@media screen and (min-width: 600px) {
+    .mpc-callout--style_2 {
+        min-height: 325px;   
+    }
+    .mpc-callout--style_2 p { 
+        font-size: 18px;
+    }
+}
+
+@media screen and (width: 768px) {
+    .mpc-callout--style_2 {
+        min-height: 278px;   
+    }
+    .flex-row-center i {
+        bottom: 30px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .mpc-callout--style_2 {
+        min-height: 247px;   
+    }
+    .flex-row-center i {
+        bottom: 15px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .mpc-callout--style_2 {
+        min-height: 308px;   
+    }
+     .mpc-callout--style_2 p { 
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .mpc-callout--style_2 {
+        min-height: 358px;   
+    }
+    .flex-row-center i {
+        bottom: 85px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .mpc-callout--style_2 {
+        min-height: 425px;   
+    }
+}
