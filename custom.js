@@ -80,6 +80,7 @@ $j(document).ready(function() {
       restoreForm();
     }, 15000);
     const successMessage = `<div data-id="mpc_callout-625977837bf2f07" class="mpc-callout mpc-callout--style_2 mpc-callout-submitted mpc-inited" style="opacity: 1;"><p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class="flex-row-center"><i class="mpc-icon-part mpc-regular mpc-transition"><img width="260" height="263" src="http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png" class="attachment-full" alt=""></i></div></div>`;
+    $j(".hide-on-submit").hide();
     $j($j(".form-container").find(".wpb_wrapper")[0]).html(successMessage);
   }
 
@@ -190,6 +191,7 @@ $j(document).ready(function() {
 });
 
 function restoreForm() {
+  $j(".hide-on-submit").show();
   localStorage.removeItem("form-submitted");
 }
 
