@@ -27,7 +27,9 @@ $j(document).ready(function() {
     window.location.pathname.indexOf("view-order");
   const isInspirationPath = window.location.hash.indexOf("inspiration") > -1;
   const isFormPath = window.location.pathname.indexOf("register") > -1;
-  const isAccountPath = window.location.pathname.indexOf("my-account") > -1;
+  const isAccountPath =
+    window.location.pathname.indexOf("my-account") > -1 &&
+    window.location.pathname.indexOf("my-account/edit-account") === -1;
   const showHomeFormSubmitMessage =
     localStorage.getItem("form-submitted") == "true" &&
     window.location.pathname === "/";
