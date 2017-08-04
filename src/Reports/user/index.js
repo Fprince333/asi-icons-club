@@ -35,7 +35,6 @@ class UserReport extends Component {
       switch (key) {
         case "first_name":
           return <TableHeaderColumn key={key}>First Name</TableHeaderColumn>;
-          break;
 
         case "last_name":
           return <TableHeaderColumn key={key}>Last Name</TableHeaderColumn>;
@@ -47,46 +46,40 @@ class UserReport extends Component {
           return <TableHeaderColumn key={key}>Job Title </TableHeaderColumn>;
 
         case "Account_Executive":
-          return (
-            <TableHeaderColumn key={key}>Account Executive </TableHeaderColumn>
-          );
+          return <TableHeaderColumn key={key}>Account Executive </TableHeaderColumn>;
 
         default:
-          break;
+          return null
       }
     });
 
-    const body = this.state.data.prospect.map(prospect => {
+    const body = this.state.data.prospect.length > 1 ? this.state.data.prospect.filter(member => !member.company.includes("Architectural Systems")).map(prospect => {
       let rowBody = Object.keys(prospect).map(key => {
         switch (key) {
           case "first_name":
             return <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>;
-            break;
 
           case "last_name":
             return <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>;
-            break;
 
           case "company":
             return <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>;
-            break;
 
           case "job_title":
             return <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>;
-            break;
 
           case "Account_Executive":
             return <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>;
-            break;
 
           default:
-            break;
+            return null
         }
       });
       return (
         <TableRow key={prospect.id ? prospect.id : 42}>{rowBody}</TableRow>
       );
-    });
+    }) : null;
+    const totalMembers = this.state.data.prospect.length > 1 ? this.state.data.total_results - this.state.data.prospect.filter(member => member.company.includes("Architectural Systems")).length : 0
     return (
       <div>
         <h2>Total Users </h2>
@@ -94,7 +87,7 @@ class UserReport extends Component {
           style={paperStyle}
           zDepth={3}
           circle={true}
-          children={<h3>{this.state.data.total_results}</h3>}
+          children={<h3>{totalMembers}</h3>}
         />
         <Table>
           <TableHeader>
