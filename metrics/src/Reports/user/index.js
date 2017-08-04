@@ -17,7 +17,7 @@ class UserReport extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:9292/members").then(response => {
+    axios.get("https://icons-club-metrics.herokuapp.com/members").then(response => {
       this.setState({ data: response.data });
     });
   }
