@@ -98,12 +98,12 @@ class UserReport extends Component {
           onClick={this.showUsers}
         />
         <Table className="usersTable" style={{ display: "none" }}>
-          <TableHeader>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false} >
             <TableRow>
               {headers}
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody displayRowCheckbox={false}>
             {body}
           </TableBody>
         </Table>
