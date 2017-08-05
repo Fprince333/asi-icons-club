@@ -22,15 +22,13 @@ class UserReport extends Component {
     });
   }
 
+  showUsers() {
+    Array.from(document.getElementsByClassName("usersTable")).map(table => {
+      return table.style.display = "table";
+    })
+  }
+
   render() {
-    const paperStyle = {
-      height: 100,
-      width: 100,
-      margin: 0,
-      padding: 15,
-      textAlign: "center",
-      display: "inline-block"
-    };
     const headers = Object.keys(this.state.data.prospect[0]).map(key => {
       switch (key) {
         case "first_name":
@@ -80,6 +78,15 @@ class UserReport extends Component {
       );
     }) : null;
     const totalMembers = this.state.data.prospect.length > 1 ? this.state.data.total_results - this.state.data.prospect.filter(member => member.company.includes("Architectural Systems")).length : 0
+    const paperStyle = {
+      height: 100,
+      width: 100,
+      margin: 5,
+      paddingTop: 20,
+      textAlign: "center",
+      display: "inline-block",
+      cursor: "pointer"
+    };
     return (
       <div>
         <h2>Total Users </h2>
@@ -87,9 +94,10 @@ class UserReport extends Component {
           style={paperStyle}
           zDepth={3}
           circle={true}
-          children={<h3>{totalMembers}</h3>}
+          children={<div><h3 style={{ margin: 0 }}>{totalMembers}</h3> <p>View All</p></div>}
+          onClick={this.showUsers}
         />
-        <Table>
+        <Table className="usersTable" style={{ display: "none" }}>
           <TableHeader>
             <TableRow>
               {headers}
@@ -99,7 +107,7 @@ class UserReport extends Component {
             {body}
           </TableBody>
         </Table>
-      </div>
+      </div >
     );
   }
 }
