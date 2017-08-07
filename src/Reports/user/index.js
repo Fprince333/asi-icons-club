@@ -9,11 +9,15 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
+import { Card } from "material-ui/Card";
 
 class UserReport extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: { prospect: [""], total_results: "Loading..." } };
+    this.state = {
+      data: { prospect: [""], total_results: "Loading..." },
+      leader: "Loading..."
+    };
   }
 
   componentDidMount() {
@@ -21,6 +25,32 @@ class UserReport extends Component {
       .get("https://icons-club-metrics.herokuapp.com/members")
       .then(response => {
         this.setState({ data: response.data });
+        let leaders = [];
+        let leaderboard = {};
+        this.state.data.prospect.map(prospect => {
+          Object.keys(prospect).map(key => {
+            switch (key) {
+              case "Account_Executive":
+                leaders.push(prospect[key]);
+
+              default:
+                break;
+            }
+          });
+        });
+        for (var index = 0; index < leaders.length; index++) {
+          var num = leaders[index];
+          leaderboard[num] = leaderboard[num] ? leaderboard[num] + 1 : 1;
+        }
+        if (Object.keys(leaderboard).length > 0) {
+          let leadersArray = Object.keys(leaderboard).map(
+            key => leaderboard[key]
+          );
+          let leader = Object.keys(leaderboard).find(
+            key => leaderboard[key] === leadersArray[0]
+          );
+          this.setState({ leader: leader });
+        }
       });
   }
 
@@ -54,6 +84,12 @@ class UserReport extends Component {
   }
 
   render() {
+    const totalMembers = this.state.data.prospect.length > 1
+      ? this.state.data.total_results -
+          this.state.data.prospect.filter(member =>
+            member.company.includes("Architectural Systems")
+          ).length
+      : "Loading...";
     const headers = Object.keys(this.state.data.prospect[0]).map(key => {
       switch (key) {
         case "first_name":
@@ -138,12 +174,6 @@ class UserReport extends Component {
             );
           })
       : null;
-    const totalMembers = this.state.data.prospect.length > 1
-      ? this.state.data.total_results -
-          this.state.data.prospect.filter(member =>
-            member.company.includes("Architectural Systems")
-          ).length
-      : 0;
     const paperStyle = {
       height: 100,
       width: 100,
@@ -155,18 +185,35 @@ class UserReport extends Component {
     };
     return (
       <div>
-        <h2>Total Users </h2>
-        <Paper
-          style={paperStyle}
-          zDepth={3}
-          circle={true}
-          children={
-            <div>
-              <h3 style={{ margin: 0 }}>{totalMembers}</h3> <p>View All</p>
-            </div>
-          }
-          onClick={this.showUsers}
-        />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Card style={{ padding: "10px", margin: "10px" }}>
+            <h2>Total Users </h2>
+            <Paper
+              style={paperStyle}
+              zDepth={3}
+              circle={true}
+              children={
+                <div>
+                  <h3 style={{ margin: 0 }}>{totalMembers}</h3> <p>View All</p>
+                </div>
+              }
+              onClick={this.showUsers}
+            />
+          </Card>
+          <Card style={{ padding: "10px", margin: "10px" }}>
+            <h2>Leader </h2>
+            <Paper
+              style={paperStyle}
+              zDepth={3}
+              circle={true}
+              children={
+                <div>
+                  <h3 style={{ margin: 0 }}>{this.state.leader}</h3>
+                </div>
+              }
+            />
+          </Card>
+        </div>
         <Table className="usersTable" style={{ display: "none" }}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow
