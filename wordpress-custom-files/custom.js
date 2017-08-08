@@ -9,6 +9,7 @@ var waitForEl = function(selector, callback) {
 };
 
 $j(document).ready(function() {
+  const isNonMember = window.location.href.indexOf("non-member") > -1;
   const hutchQuote = $j(".yt-hutchinson");
   const daimiQuote = $j(".yt-daimi");
   const cobenQuote = $j(".yt-coben");
@@ -37,11 +38,22 @@ $j(document).ready(function() {
     localStorage.getItem("form-submitted") == "true" &&
     window.location.pathname !== "/";
   const hasFormErrors = window.location.href.indexOf("error") > -1;
+  const redirectToRegistration =
+    localStorage.getItem("invited-member") &&
+    window.location.pathname.indexOf("join") > -1;
 
   $j("a:contains('billing addresses')").text("shipping address");
   $j(".post_info").hide();
   $j(".entry_date ").hide();
   $j(".post_more").find("a").text("View");
+
+  if (isNonMember) {
+    localStorage.setItem("invited-member", true);
+  }
+
+  if (redirectToRegistration) {
+    window.location = "/register/";
+  }
 
   if ($j(".rev-btn").length > 0 && $j(window).width() < 640) {
     $j($j(".rev-btn:even")).hide();
@@ -110,6 +122,7 @@ $j(document).ready(function() {
 
   if (isFormPath) {
     $j("form").submit(function() {
+      localStorage.removeItem("invited-member");
       $j(".form-body").hide();
       $j(".form-footnote").hide();
       $j(".form-headline").find("span").text("Please Wait...");
