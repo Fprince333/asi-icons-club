@@ -5,11 +5,12 @@ import {
   Table,
   TableBody,
   TableHeader,
-  TableHeaderColumn,
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
 import { Card } from "material-ui/Card";
+
+import Header from "./list/header";
 
 class UserReport extends Component {
   constructor(props) {
@@ -28,13 +29,13 @@ class UserReport extends Component {
         let leaders = [];
         let leaderboard = {};
         this.state.data.prospect.map(prospect => {
-          Object.keys(prospect).map(key => {
+          return Object.keys(prospect).map(key => {
             switch (key) {
               case "Account_Executive":
-                leaders.push(prospect[key]);
+                return leaders.push(prospect[key]);
 
               default:
-                break;
+                return null;
             }
           });
         });
@@ -90,47 +91,6 @@ class UserReport extends Component {
             member.company.includes("Architectural Systems")
           ).length
       : "Loading...";
-    const headers = Object.keys(this.state.data.prospect[0]).map(key => {
-      switch (key) {
-        case "first_name":
-          return (
-            <TableHeaderColumn key={key} data-id={key}>
-              First Name
-            </TableHeaderColumn>
-          );
-
-        case "last_name":
-          return (
-            <TableHeaderColumn key={key} data-id={key}>
-              Last Name
-            </TableHeaderColumn>
-          );
-
-        case "company":
-          return (
-            <TableHeaderColumn key={key} data-id={key}>
-              Company
-            </TableHeaderColumn>
-          );
-
-        case "job_title":
-          return (
-            <TableHeaderColumn key={key} data-id={key}>
-              Job Title{" "}
-            </TableHeaderColumn>
-          );
-
-        case "Account_Executive":
-          return (
-            <TableHeaderColumn key={key} data-id={key}>
-              Account Executive{" "}
-            </TableHeaderColumn>
-          );
-
-        default:
-          return null;
-      }
-    });
 
     const body = this.state.data.prospect.length > 1
       ? this.state.data.prospect
@@ -216,13 +176,12 @@ class UserReport extends Component {
         </div>
         <Table className="usersTable" style={{ display: "none" }}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableRow
+            <Header
               onCellClick={event => {
                 this.sortByColumn(event);
               }}
-            >
-              {headers}
-            </TableRow>
+              columns={this.state.data.prospect[0]}
+            />
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {body}
