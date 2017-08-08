@@ -50,7 +50,7 @@ class UserReport extends Component {
           let leader = Object.keys(leaderboard).find(
             key => leaderboard[key] === leadersArray[0]
           );
-          this.setState({ leader: leader });
+          this.setState({ leader: leader, leaderTotal: leaderboard[leader] });
         }
       });
   }
@@ -85,6 +85,7 @@ class UserReport extends Component {
   }
 
   render() {
+    console.log(this.state.leader);
     const totalMembers = this.state.data.prospect.length > 1
       ? this.state.data.total_results -
           this.state.data.prospect.filter(member =>
@@ -169,6 +170,7 @@ class UserReport extends Component {
               children={
                 <div>
                   <h3 style={{ margin: 0 }}>{this.state.leader}</h3>
+                  <p style={{ marginTop: 5 }}>{this.state.leaderTotal}</p>
                 </div>
               }
             />
