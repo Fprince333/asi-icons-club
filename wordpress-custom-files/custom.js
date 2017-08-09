@@ -9,6 +9,7 @@ var waitForEl = function(selector, callback) {
 };
 
 $j(document).ready(function() {
+  const needsToRegisterOrLogin = $j(".showlogin").length > 0;
   const isNonMember = window.location.href.indexOf("non-member") > -1;
   const hutchQuote = $j(".yt-hutchinson");
   const daimiQuote = $j(".yt-daimi");
@@ -46,6 +47,17 @@ $j(document).ready(function() {
   $j(".post_info").hide();
   $j(".entry_date ").hide();
   $j(".post_more").find("a").text("View");
+
+  if (needsToRegisterOrLogin) {
+    $j(".woocommerce-info").html(
+      "You must be a registered Icons Club Member to place an order. Please register <a href='http://iconsclub.archsystems.com/register/'>here</a>"
+    );
+    setInterval(function() {
+      if ($j(".checkout").length > 0 && $j(".checkout").is(":visible")) {
+        $j(".checkout").hide();
+      }
+    }, 300);
+  }
 
   if (isNonMember) {
     localStorage.setItem("invited-member", true);
