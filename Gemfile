@@ -5,6 +5,7 @@ gem 'sinatra'
 gem "ruby-pardot"
 gem 'dotenv'
 gem "sinatra-cross_origin"
+gem 'woocommerce_api'
 
 group :development do
   gem 'pry'

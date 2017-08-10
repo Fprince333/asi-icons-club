@@ -4,6 +4,7 @@ require 'sinatra/cross_origin'
 require 'dotenv'
 require 'ruby-pardot'
 require 'pry' if development?
+require 'woocommerce_api'
 
 Dotenv.load
 
@@ -23,6 +24,20 @@ get '/members' do
   client.format = "full"
   client.authenticate
   client.prospects.query(:list_id => "80205").to_json
+end
+
+get '/orders' do 
+  woocommerce = WooCommerce::API.new(
+    "http://iconsclub.archsystems.com",
+    "ck_dd9e27db56776f8c193af83947717092c2e47a9e",
+    "cs_5b0b8e45741da23433c8213e8f5a337d00ea735b",
+    {
+      wp_api: true,
+      version: "wc/v1"
+    }
+  )
+  response = woocommerce.get "orders"
+  {:total_orders => response.length}.to_json
 end
 
 options "*" do

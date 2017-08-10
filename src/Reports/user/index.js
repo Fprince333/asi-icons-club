@@ -17,11 +17,17 @@ class UserReport extends Component {
     super(props);
     this.state = {
       data: { prospect: [""], total_results: "Loading..." },
-      leader: "Loading..."
+      leader: "Loading...",
+      totalOrders: "Loading..."
     };
   }
 
   componentDidMount() {
+    axios
+      .get("https://icons-club-metrics.herokuapp.com/orders")
+      .then(response => {
+        this.setState({ totalOrders: response.data.total_orders });
+      });
     axios
       .get("https://icons-club-metrics.herokuapp.com/members")
       .then(response => {
@@ -85,7 +91,6 @@ class UserReport extends Component {
   }
 
   render() {
-    console.log(this.state.leader);
     const totalMembers = this.state.data.prospect.length > 1
       ? this.state.data.total_results -
           this.state.data.prospect.filter(member =>
@@ -171,6 +176,19 @@ class UserReport extends Component {
                 <div>
                   <h3 style={{ margin: 0 }}>{this.state.leader}</h3>
                   <p style={{ marginTop: 5 }}>{this.state.leaderTotal}</p>
+                </div>
+              }
+            />
+          </Card>
+          <Card style={{ padding: "10px", margin: "10px" }}>
+            <h2>Total Orders </h2>
+            <Paper
+              style={paperStyle}
+              zDepth={3}
+              circle={true}
+              children={
+                <div>
+                  <h3 style={{ margin: 0 }}>{this.state.totalOrders}</h3>
                 </div>
               }
             />
