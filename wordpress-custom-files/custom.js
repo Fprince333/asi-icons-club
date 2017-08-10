@@ -9,6 +9,7 @@ var waitForEl = function(selector, callback) {
 };
 
 $j(document).ready(function() {
+  const hasScrollButton = $j(".scroll").length > 0;
   const needsToRegisterOrLogin = $j(".showlogin").length > 0;
   const isNonMember = window.location.href.indexOf("non-member") > -1;
   const hutchQuote = $j(".yt-hutchinson");
@@ -47,6 +48,18 @@ $j(document).ready(function() {
   $j(".post_info").hide();
   $j(".entry_date ").hide();
   $j(".post_more").find("a").text("View");
+
+  if (hasScrollButton) {
+    $j(".scroll").on("click", function() {
+      const elementClass = this.id.replace("to-", ".");
+      $j("html, body").animate(
+        {
+          scrollTop: $j(elementClass).offset().top
+        },
+        1200
+      );
+    });
+  }
 
   if (needsToRegisterOrLogin) {
     $j(".woocommerce-info").html(
