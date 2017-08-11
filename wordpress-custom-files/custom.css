@@ -522,3 +522,8 @@ input[type='submit'] {
 select {
     background-color: white;
 }
+
+.mobile_arrow {
+    left: 160px;
+    top: 3px !important;
+}
