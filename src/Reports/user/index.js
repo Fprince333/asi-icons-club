@@ -18,11 +18,18 @@ class UserReport extends Component {
     this.state = {
       data: { prospect: [""], total_results: "Loading..." },
       leader: "Loading...",
-      totalOrders: "Loading..."
+      totalOrders: "Loading...",
+      gaData: {}
     };
   }
 
   componentDidMount() {
+    axios
+      .get("http://localhost:9292/analytics")
+      .then(response => {
+        this.setState({ gaData: response.data })
+        console.log(response.data)
+      });
     axios
       .get("https://icons-club-metrics.herokuapp.com/orders")
       .then(response => {
@@ -69,7 +76,7 @@ class UserReport extends Component {
 
   sortByColumn(event) {
     const sortProperty = event.target.dataset.id;
-    const sortedData = this.state.data.prospect.sort(function(a, b) {
+    const sortedData = this.state.data.prospect.sort(function (a, b) {
       if (a[sortProperty] && b[sortProperty]) {
         let typeA = a[sortProperty].toUpperCase();
         let typeB = b[sortProperty].toUpperCase();
@@ -93,60 +100,63 @@ class UserReport extends Component {
   render() {
     const totalMembers = this.state.data.prospect.length > 1
       ? this.state.data.total_results -
-          this.state.data.prospect.filter(member =>
-            member.company.includes("Architectural Systems")
-          ).length
+      this.state.data.prospect.filter(member =>
+        member.company.includes("Architectural Systems")
+      ).length
       : "Loading...";
 
     const body = this.state.data.prospect.length > 1
       ? this.state.data.prospect
-          .filter(member => !member.company.includes("Architectural Systems"))
-          .map(prospect => {
-            let rowBody = Object.keys(prospect).map(key => {
-              switch (key) {
-                case "first_name":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
+        .filter(member => !member.company.includes("Architectural Systems"))
+        .map(prospect => {
+          let rowBody = Object.keys(prospect).map(key => {
+            switch (key) {
+              case "first_name":
+                return (
+                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                );
 
-                case "last_name":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
+              case "last_name":
+                return (
+                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                );
 
-                case "company":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
+              case "company":
+                return (
+                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                );
 
-                case "job_title":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
+              case "job_title":
+                return (
+                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                );
 
-                case "Account_Executive":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
+              case "Account_Executive":
+                return (
+                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                );
 
-                default:
-                  return null;
-              }
-            });
-            return (
-              <TableRow key={prospect.id ? prospect.id : 42}>
-                {rowBody}
-              </TableRow>
-            );
-          })
+              default:
+                return null;
+            }
+          });
+          return (
+            <TableRow key={prospect.id ? prospect.id : 42}>
+              {rowBody}
+            </TableRow>
+          );
+        })
       : null;
+    const sessionMinutes = this.state.gaData.totalsForAllResults ? ((this.state.gaData.totalsForAllResults['ga:sessionDuration'] / this.state.gaData.totalsForAllResults['ga:sessions']) / 60).toString().split(".")[0] : null
+    const sessionSeconds = this.state.gaData.totalsForAllResults ? ((this.state.gaData.totalsForAllResults['ga:sessionDuration'] / this.state.gaData.totalsForAllResults['ga:sessions']) / 60).toString().split(".")[1].substring(0, 2) : null
     const paperStyle = {
-      height: 100,
-      width: 100,
-      margin: 5,
-      paddingTop: 20,
+      height: 150,
+      width: 150,
+      margin: "0 auto",
       textAlign: "center",
-      display: "inline-block",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
       cursor: "pointer"
     };
     return (
@@ -189,6 +199,21 @@ class UserReport extends Component {
               children={
                 <div>
                   <h3 style={{ margin: 0 }}>{this.state.totalOrders}</h3>
+                </div>
+              }
+            />
+          </Card>
+          <Card style={{ padding: "10px", margin: "10px" }}>
+            <h2>Avg. Session Length </h2>
+            <Paper
+              style={paperStyle}
+              zDepth={3}
+              circle={true}
+              children={
+                <div>
+                  {this.state.gaData.totalsForAllResults ?
+                    <h3 style={{ margin: 0 }}>{sessionMinutes} Minutes and <br /> {sessionSeconds} Seconds</h3> :
+                    <h3 style={{ margin: 0 }}>Loading...</h3>}
                 </div>
               }
             />
