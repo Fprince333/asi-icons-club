@@ -5,6 +5,7 @@ import {
   Table,
   TableBody,
   TableHeader,
+  TableHeaderColumn,
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
@@ -62,13 +63,31 @@ class UserReport extends Component {
           let leader = Object.keys(leaderboard).find(
             key => leaderboard[key] === leadersArray.sort((a, b) => { return b - a })[0]
           );
-          this.setState({ leader: leader, leaderTotal: leaderboard[leader] });
+          let sortedLeaderboard = Object.keys(leaderboard).sort((a, b) => { return leaderboard[b] - leaderboard[a] })
+          this.setState({
+            leader: leader,
+            leaderTotal: leaderboard[leader],
+            leaderboard: sortedLeaderboard,
+            leaderboardObject: leaderboard
+          });
         }
       });
   }
 
   showUsers() {
     Array.from(document.getElementsByClassName("usersTable")).map(table => {
+      return (table.style.display = "table");
+    });
+    Array.from(document.getElementsByClassName("leaderboard")).map(table => {
+      return (table.style.display = "none");
+    });
+  }
+
+  showLeaderboard() {
+    Array.from(document.getElementsByClassName("usersTable")).map(table => {
+      return (table.style.display = "none");
+    });
+    Array.from(document.getElementsByClassName("leaderboard")).map(table => {
       return (table.style.display = "table");
     });
   }
@@ -146,6 +165,15 @@ class UserReport extends Component {
           );
         })
       : null;
+    const leaderboardBody = this.state.leaderboard ? this.state.leaderboard.map((person, index) => {
+      return (
+        <TableRow key={index} >
+          <TableRowColumn>{index + 1}</TableRowColumn>
+          <TableRowColumn>{person}</TableRowColumn>
+          <TableRowColumn>{this.state.leaderboardObject[person]}</TableRowColumn>
+        </TableRow>
+      );
+    }) : null
     const sessionMinutes = this.state.gaData.totalsForAllResults ? ((this.state.gaData.totalsForAllResults['ga:sessionDuration'] / this.state.gaData.totalsForAllResults['ga:sessions']) / 60).toString().split(".")[0] : null
     const sessionSeconds = this.state.gaData.totalsForAllResults ? ((this.state.gaData.totalsForAllResults['ga:sessionDuration'] / this.state.gaData.totalsForAllResults['ga:sessions']) / 60).toString().split(".")[1].substring(0, 2) : null
     const paperStyle = {
@@ -176,7 +204,7 @@ class UserReport extends Component {
             />
           </Card>
           <Card style={{ padding: "10px", margin: "10px" }}>
-            <h2>Leader </h2>
+            <h2>Leader {this.state.leaderTotal ? ": " + this.state.leaderTotal : null}</h2>
             <Paper
               style={paperStyle}
               zDepth={3}
@@ -184,9 +212,10 @@ class UserReport extends Component {
               children={
                 <div>
                   <h3 style={{ margin: 0 }}>{this.state.leader}</h3>
-                  <p style={{ marginTop: 5 }}>{this.state.leaderTotal}</p>
+                  <p style={{ marginTop: 5 }}>View Leaderboard</p>
                 </div>
               }
+              onClick={this.showLeaderboard}
             />
           </Card>
           <Card style={{ padding: "10px", margin: "10px" }}>
@@ -229,6 +258,18 @@ class UserReport extends Component {
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {body}
+          </TableBody>
+        </Table>
+        <Table className="leaderboard" style={{ display: "none" }}>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <TableRow>
+              <TableHeaderColumn> </TableHeaderColumn>
+              <TableHeaderColumn> Name</TableHeaderColumn>
+              <TableHeaderColumn> Members </TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
+            {leaderboardBody}
           </TableBody>
         </Table>
       </div>
