@@ -60,7 +60,7 @@ class UserReport extends Component {
             key => leaderboard[key]
           );
           let leader = Object.keys(leaderboard).find(
-            key => leaderboard[key] === leadersArray[0]
+            key => leaderboard[key] === leadersArray.sort((a, b) => { return b - a })[0]
           );
           this.setState({ leader: leader, leaderTotal: leaderboard[leader] });
         }
