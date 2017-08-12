@@ -25,10 +25,9 @@ class UserReport extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:9292/analytics")
+      .get("https://icons-club-metrics.herokuapp.com/analytics")
       .then(response => {
         this.setState({ gaData: response.data })
-        console.log(response.data)
       });
     axios
       .get("https://icons-club-metrics.herokuapp.com/orders")
