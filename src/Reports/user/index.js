@@ -28,7 +28,7 @@ class UserReport extends Component {
     axios
       .get("https://icons-club-metrics.herokuapp.com/analytics")
       .then(response => {
-        this.setState({ gaData: response.data })
+        this.setState({ gaData: response.data });
       });
     axios
       .get("https://icons-club-metrics.herokuapp.com/orders")
@@ -61,9 +61,15 @@ class UserReport extends Component {
             key => leaderboard[key]
           );
           let leader = Object.keys(leaderboard).find(
-            key => leaderboard[key] === leadersArray.sort((a, b) => { return b - a })[0]
+            key =>
+              leaderboard[key] ===
+              leadersArray.sort((a, b) => {
+                return b - a;
+              })[0]
           );
-          let sortedLeaderboard = Object.keys(leaderboard).sort((a, b) => { return leaderboard[b] - leaderboard[a] })
+          let sortedLeaderboard = Object.keys(leaderboard).sort((a, b) => {
+            return leaderboard[b] - leaderboard[a];
+          });
           this.setState({
             leader: leader,
             leaderTotal: leaderboard[leader],
@@ -94,7 +100,7 @@ class UserReport extends Component {
 
   sortByColumn(event) {
     const sortProperty = event.target.dataset.id;
-    const sortedData = this.state.data.prospect.sort(function (a, b) {
+    const sortedData = this.state.data.prospect.sort(function(a, b) {
       if (a[sortProperty] && b[sortProperty]) {
         let typeA = a[sortProperty].toUpperCase();
         let typeB = b[sortProperty].toUpperCase();
@@ -118,64 +124,91 @@ class UserReport extends Component {
   render() {
     const totalMembers = this.state.data.prospect.length > 1
       ? this.state.data.total_results -
-      this.state.data.prospect.filter(member =>
-        member.company.includes("Architectural Systems")
-      ).length
+          this.state.data.prospect.filter(member => {
+            if (member.company) {
+              return member.company.includes("Architectural Systems");
+            } else {
+              return null;
+            }
+          }).length
       : "Loading...";
 
     const body = this.state.data.prospect.length > 1
       ? this.state.data.prospect
-        .filter(member => !member.company.includes("Architectural Systems"))
-        .map(prospect => {
-          let rowBody = Object.keys(prospect).map(key => {
-            switch (key) {
-              case "first_name":
-                return (
-                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                );
-
-              case "last_name":
-                return (
-                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                );
-
-              case "company":
-                return (
-                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                );
-
-              case "job_title":
-                return (
-                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                );
-
-              case "Account_Executive":
-                return (
-                  <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                );
-
-              default:
-                return null;
+          .filter(member => {
+            if (member.company) {
+              return !member.company.includes("Architectural Systems");
+            } else {
+              return null;
             }
-          });
+          })
+          .map(prospect => {
+            let rowBody = Object.keys(prospect).map(key => {
+              switch (key) {
+                case "first_name":
+                  return (
+                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                  );
+
+                case "last_name":
+                  return (
+                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                  );
+
+                case "company":
+                  return (
+                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                  );
+
+                case "job_title":
+                  return (
+                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                  );
+
+                case "Account_Executive":
+                  return (
+                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                  );
+
+                default:
+                  return null;
+              }
+            });
+            return (
+              <TableRow key={prospect.id ? prospect.id : 42}>
+                {rowBody}
+              </TableRow>
+            );
+          })
+      : null;
+    const leaderboardBody = this.state.leaderboard
+      ? this.state.leaderboard.map((person, index) => {
           return (
-            <TableRow key={prospect.id ? prospect.id : 42}>
-              {rowBody}
+            <TableRow key={index}>
+              <TableRowColumn>{index + 1}</TableRowColumn>
+              <TableRowColumn>{person}</TableRowColumn>
+              <TableRowColumn>
+                {this.state.leaderboardObject[person]}
+              </TableRowColumn>
             </TableRow>
           );
         })
       : null;
-    const leaderboardBody = this.state.leaderboard ? this.state.leaderboard.map((person, index) => {
-      return (
-        <TableRow key={index} >
-          <TableRowColumn>{index + 1}</TableRowColumn>
-          <TableRowColumn>{person}</TableRowColumn>
-          <TableRowColumn>{this.state.leaderboardObject[person]}</TableRowColumn>
-        </TableRow>
-      );
-    }) : null
-    const sessionMinutes = this.state.gaData.totalsForAllResults ? ((this.state.gaData.totalsForAllResults['ga:sessionDuration'] / this.state.gaData.totalsForAllResults['ga:sessions']) / 60).toString().split(".")[0] : null
-    const sessionSeconds = this.state.gaData.totalsForAllResults ? ((this.state.gaData.totalsForAllResults['ga:sessionDuration'] / this.state.gaData.totalsForAllResults['ga:sessions']) / 60).toString().split(".")[1].substring(0, 2) : null
+    const sessionMinutes = this.state.gaData.totalsForAllResults
+      ? (this.state.gaData.totalsForAllResults["ga:sessionDuration"] /
+          this.state.gaData.totalsForAllResults["ga:sessions"] /
+          60)
+          .toString()
+          .split(".")[0]
+      : null;
+    const sessionSeconds = this.state.gaData.totalsForAllResults
+      ? (this.state.gaData.totalsForAllResults["ga:sessionDuration"] /
+          this.state.gaData.totalsForAllResults["ga:sessions"] /
+          60)
+          .toString()
+          .split(".")[1]
+          .substring(0, 2)
+      : null;
     const paperStyle = {
       height: 150,
       width: 150,
@@ -204,7 +237,11 @@ class UserReport extends Component {
             />
           </Card>
           <Card style={{ padding: "10px", margin: "10px" }}>
-            <h2>Leader {this.state.leaderTotal ? ": " + this.state.leaderTotal : null}</h2>
+            <h2>
+              Leader
+              {" "}
+              {this.state.leaderTotal ? ": " + this.state.leaderTotal : null}
+            </h2>
             <Paper
               style={paperStyle}
               zDepth={3}
@@ -239,9 +276,19 @@ class UserReport extends Component {
               circle={true}
               children={
                 <div>
-                  {this.state.gaData.totalsForAllResults ?
-                    <h3 style={{ margin: 0 }}>{sessionMinutes} Minutes and <br /> {sessionSeconds} Seconds</h3> :
-                    <h3 style={{ margin: 0 }}>Loading...</h3>}
+                  {this.state.gaData.totalsForAllResults
+                    ? <h3 style={{ margin: 0 }}>
+                        {sessionMinutes}
+                        {" "}
+                        Minutes and
+                        {" "}
+                        <br />
+                        {" "}
+                        {sessionSeconds}
+                        {" "}
+                        Seconds
+                      </h3>
+                    : <h3 style={{ margin: 0 }}>Loading...</h3>}
                 </div>
               }
             />
