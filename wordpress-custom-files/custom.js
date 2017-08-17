@@ -49,6 +49,19 @@ $j(document).ready(function() {
   $j(".entry_date ").hide();
   $j(".post_more").find("a").text("View");
 
+  setInterval(function() {
+    $j(".woocommerce-message").length > 0
+      ? $j(".woocommerce-message").html(
+          $j(".woocommerce-message")
+            .html()
+            .replace(
+              "“Ornamental Surfaces Sample Chain”",
+              "Ornamental Surfaces Sample Chain"
+            )
+        )
+      : null;
+  }, 300);
+
   if (hasScrollButton) {
     $j(".scroll").on("click", function() {
       const elementClass = this.id.replace("to-", ".");
