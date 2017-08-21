@@ -120,6 +120,8 @@ $j(document).ready(function() {
     localStorage.setItem("form-submitted", true);
   });
 
+  $j("#ship-to-different-address").hide();
+
   if (hasFormErrors) {
     $j(".form-text").html(
       "Oops, that didn't seem to work.<br> Try sending your info again."
