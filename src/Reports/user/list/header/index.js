@@ -7,14 +7,14 @@ const Header = props => {
       case "first_name":
         return (
           <TableHeaderColumn key={key} data-id={key}>
-            First Name
+            Name
           </TableHeaderColumn>
         );
 
-      case "last_name":
+      case "email":
         return (
           <TableHeaderColumn key={key} data-id={key}>
-            Last Name
+            Email
           </TableHeaderColumn>
         );
 

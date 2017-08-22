@@ -147,10 +147,12 @@ class UserReport extends Component {
               switch (key) {
                 case "first_name":
                   return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
+                    <TableRowColumn key={key}>
+                      {prospect[key] + " " + prospect["last_name"]}
+                    </TableRowColumn>
                   );
 
-                case "last_name":
+                case "email":
                   return (
                     <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
                   );

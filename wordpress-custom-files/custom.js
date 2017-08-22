@@ -50,16 +50,30 @@ $j(document).ready(function() {
   $j(".post_more").find("a").text("View");
 
   setInterval(function() {
-    $j(".woocommerce-message").length > 0
-      ? $j(".woocommerce-message").html(
-          $j(".woocommerce-message")
-            .html()
-            .replace(
-              "“Ornamental Surfaces Sample Chain”",
-              "Ornamental Surfaces Sample Chain"
-            )
-        )
-      : null;
+    if ($j(".woocommerce-message").length > 0) {
+      if ($j(".woocommerce-message").html().indexOf("Ornamental") > -1) {
+        $j(".woocommerce-message")
+          .html()
+          .replace(
+            "“Ornamental Surfaces Sample Chain”",
+            "Ornamental Surfaces Sample Chain"
+          );
+      } else if ($j(".woocommerce-message").html().indexOf("Interlock") > -1) {
+        $j(".woocommerce-message")
+          .html()
+          .replace(
+            "“Interlock Reclaimed Barnwood Eco-Panels”",
+            "Interlock Reclaimed Barnwood Eco-Panels"
+          );
+      } else if ($j(".woocommerce-message").html().indexOf("Infused") > -1) {
+        $j(".woocommerce-message")
+          .html()
+          .replace(
+            "“Infused Glass Mosaics Sample Box”",
+            "Infused Glass Mosaics Sample Box"
+          );
+      }
+    }
   }, 300);
 
   if (hasScrollButton) {
