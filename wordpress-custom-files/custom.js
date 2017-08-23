@@ -76,6 +76,10 @@ $j(document).ready(function() {
     }
   }, 300);
 
+  $j("#chat").click(function() {
+    userlike.userlikeStartChat();
+  });
+
   if (hasScrollButton) {
     $j(".scroll").on("click", function() {
       const elementClass = this.id.replace("to-", ".");
