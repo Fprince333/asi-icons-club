@@ -26,6 +26,7 @@ $j(document).ready(function() {
 	const isOrderPath =
 		window.location.pathname.indexOf('order-received') > -1 || window.location.pathname.indexOf('view-order');
 	const isInspirationPath = window.location.hash.indexOf('inspiration') > -1;
+	const isQuotesPath = window.location.hash.indexOf('quotes') > -1;
 	const isFormPath = window.location.pathname.indexOf('register') > -1;
 	const isAccountPath =
 		window.location.pathname.indexOf('my-account') > -1 &&
@@ -227,6 +228,9 @@ $j(document).ready(function() {
 					$j('article.mix:gt(7)').hide();
 					$j('.projects_holder').after($showMoreButton);
 					$j('#show-more').on('click', showMore);
+					if (isQuotesPath) {
+						$j('html, body').animate({ scrollTop: $j('.quotes').offset().top }, 1000);
+					}
 					clearInterval(addShowMoreButton);
 				}
 			}
