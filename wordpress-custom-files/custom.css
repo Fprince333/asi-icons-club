@@ -532,3 +532,32 @@ select {
 	left: 160px;
 	top: 3px !important;
 }
+
+.header_top_bottom_holder {
+	background-color: black;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1090px) {
+	.q_logo img.sticky,
+	.q_logo img.normal,
+	.q_logo img.light,
+	.q_logo img.dark,
+	.q_logo img.mobile {
+		height: 20px !important;
+		left: -20px;
+		top: -42px;
+	}
+}
+
+
+@media screen and (max-width: 1024px) and (min-width: 1000px) { 
+	.q_logo img.sticky,
+	.q_logo img.normal,
+	.q_logo img.light,
+	.q_logo img.dark,
+	.q_logo img.mobile {
+		height: 18px !important;
+		top: -32px;
+		left: -18px;
+	}
+}
