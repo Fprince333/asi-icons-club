@@ -9,6 +9,7 @@ var waitForEl = function(selector, callback) {
 };
 
 $j(document).ready(function() {
+
 	const hasScrollButton = $j('.scroll').length > 0;
 	const needsToRegisterOrLogin = $j('.showlogin').length > 0;
 	const isNonMember = window.location.href.indexOf('non-member') > -1;
@@ -78,6 +79,16 @@ $j(document).ready(function() {
 	$j('#chat').click(function() {
 		userlike.userlikeStartChat();
 	});
+
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		console.log("mobile browser")
+	} else {
+		console.log("desktop browser")
+		setTimeout(function() {
+			console.log("starting chat")
+			userlike.userlikeRemoteApiModeProactivePassive(3, "Hi, I'm here if you want to chat. Let's talk materials!");
+		}, 3000);
+	}
 
 	if (hasScrollButton) {
 		$j('.scroll').on('click', function() {
