@@ -80,16 +80,6 @@ $j(document).ready(function() {
 		userlike.userlikeStartChat();
 	});
 
-	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		console.log("mobile browser")
-	} else {
-		console.log("desktop browser")
-		setTimeout(function() {
-			console.log("starting chat")
-			userlike.userlikeRemoteApiModeProactivePassive(3, "Hi, I'm here if you want to chat. Let's talk materials!");
-		}, 3000);
-	}
-
 	if (hasScrollButton) {
 		$j('.scroll').on('click', function() {
 			const elementClass = this.id.replace('to-', '.');
