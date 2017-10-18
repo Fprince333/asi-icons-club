@@ -77,7 +77,7 @@ $j(document).ready(function() {
 	}, 300);
 
 	$j('#chat').click(function() {
-		userlike.userlikeStartChat();
+		olark('api.box.expand');
 	});
 
 	if (hasScrollButton) {
