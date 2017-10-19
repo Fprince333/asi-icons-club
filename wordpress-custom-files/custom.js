@@ -80,6 +80,10 @@ $j(document).ready(function() {
 		olark('api.box.expand');
 	});
 
+	$j("#olark").click(function() {
+		olark('api.box.expand')
+	})
+
 	if (hasScrollButton) {
 		$j('.scroll').on('click', function() {
 			const elementClass = this.id.replace('to-', '.');
