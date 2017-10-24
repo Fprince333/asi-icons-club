@@ -87,7 +87,8 @@ $j(document).ready(function() {
 	$j(".material-gallery .mpc-item").on("click", function(e) {
 		let sku = $j($j(e.currentTarget).find("img")[0]).attr("alt");
 		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>")
-  })
+		initTitlePolling()
+	})
 
 	if (hasScrollButton) {
 		$j('.scroll').on('click', function() {
@@ -296,6 +297,14 @@ $j(document).ready(function() {
 		fileDownload.attr('download', '');
 	}
 });
+
+function initTitlePolling() {
+	setInterval(function(){
+		let imageSrc = $j(".mfp-img").attr("src");
+		let sku = $j("img[src='" + imageSrc + "']")[1].alt;
+		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");
+	}, 500)
+}
 
 function restoreForm() {
 	$j('.hide-on-submit').show();
