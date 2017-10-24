@@ -299,10 +299,13 @@ $j(document).ready(function() {
 });
 
 function initTitlePolling() {
-	setInterval(function(){
-		let imageSrc = $j(".mfp-img").attr("src");
-		let sku = $j("img[src='" + imageSrc + "']")[1].alt;
-		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");
+	let populateSku = setInterval(function(){
+		if ($j(".mfp-title").text().length === 0) {
+			let imageSrc = $j(".mfp-img").attr("src");
+			let sku = $j("img[src='" + imageSrc + "']")[1].alt;
+			$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");		
+			clearInterval(populateSku)
+		}
 	}, 500)
 }
 
