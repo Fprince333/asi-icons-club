@@ -84,6 +84,11 @@ $j(document).ready(function() {
 		olark('api.box.expand')
 	})
 
+	$j(".material-gallery .mpc-item").on("click", function(e) {
+		let sku = $j($j(e.currentTarget).find("img")[0]).attr("alt");
+		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>")
+  })
+
 	if (hasScrollButton) {
 		$j('.scroll').on('click', function() {
 			const elementClass = this.id.replace('to-', '.');
