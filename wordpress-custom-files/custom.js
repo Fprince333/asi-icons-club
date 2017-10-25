@@ -8,6 +8,8 @@ var waitForEl = function(selector, callback) {
 	}
 };
 
+var currentPollInterval;
+
 $j(document).ready(function() {
 
 	const hasScrollButton = $j('.scroll').length > 0;
@@ -298,11 +300,27 @@ $j(document).ready(function() {
 	}
 });
 
+
+function startGalleryPolling() {
+	currentPollInterval = setInterval(currentPoll, 500);
+}
+
+function currentPoll() {
+	if ($j(".mfp-title").length && $j(".mfp-title").text().length === 0) {
+		initTitlePolling();
+	}
+}
+
 function initTitlePolling() {
 	let populateSku = setInterval(function(){
 		if ($j(".mfp-title").text().length === 0) {
 			let imageSrc = $j(".mfp-img").attr("src");
-			let sku = $j("img[src='" + imageSrc + "']")[1].alt;
+			let sku = ""
+			if (imageSrc) {
+				sku = $j("img[src='" + imageSrc + "']")[1].alt;
+			} else {
+				startGalleryPolling();
+			}
 			$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");		
 			clearInterval(populateSku)
 		}
