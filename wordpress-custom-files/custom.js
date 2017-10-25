@@ -93,6 +93,7 @@ $j(document).ready(function() {
 		let sku = $j($j(e.currentTarget).find("img")[0]).attr("alt");
 		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>")
 		initTitlePolling()
+		startGalleryPolling()
 	})
 
 	if (hasScrollButton) {
@@ -325,7 +326,7 @@ function removeCartAndQuotes() {
 	}
 	if ($j(".cart-empty").length === 2) {
 		$j(".cart-empty")[1].remove();
-		$j(".cart-empty").text("Your bag is currently empty.");
+		$j(".cart-empty").text("Your bag is currently empty.")
 		clearInterval(cartAndQuotePoll);
 	}
 }
