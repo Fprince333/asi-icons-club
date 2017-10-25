@@ -9,6 +9,7 @@ var waitForEl = function(selector, callback) {
 };
 
 var currentPollInterval;
+var cartAndQuotePoll;
 
 $j(document).ready(function() {
 
@@ -40,6 +41,8 @@ $j(document).ready(function() {
 	const hasFormErrors = window.location.href.indexOf('error') > -1;
 	const redirectToRegistration =
 		localStorage.getItem('invited-member') && window.location.pathname.indexOf('join') > -1;
+	const hasCartOnPage = $j(".woocommerce-message:contains('cart')").length;
+	const isSampleBagPath = window.location.pathname.indexOf('sample-bag') > -1;
 
 	$j("a:contains('billing addresses')").text('shipping address');
 	$j('.post_info').hide();
@@ -121,6 +124,16 @@ $j(document).ready(function() {
 
 	if (redirectToRegistration) {
 		window.location = '/register/';
+	}
+
+	if (isSampleBagPath) {
+		initCartAndQuoteRemovalPolling();
+	}
+
+	if (hasCartOnPage) {
+		let modifiedCartString = $j(".woocommerce-message:contains('cart')").html().replace("cart", "sample bag").replace("“", "").replace("”", "");
+		$j(".woocommerce-message:contains('cart')").html(modifiedCartString);
+		initCartAndQuoteRemovalPolling();
 	}
 
 	if ($j('.rev-btn').length > 0 && $j(window).width() < 640) {
@@ -300,6 +313,22 @@ $j(document).ready(function() {
 	}
 });
 
+function initCartAndQuoteRemovalPolling() {
+	cartAndQuotePoll = setInterval(removeCartAndQuotes, 200)
+}
+
+function removeCartAndQuotes() {
+	if ($j(".woocommerce-message:contains('removed')").length) {
+		let modifiedQuotesString = $j(".woocommerce-message:contains('removed')").html().replace("“", "").replace("”", "");
+		$j(".woocommerce-message:contains('removed')").html(modifiedQuotesString);
+		clearInterval(cartAndQuotePoll);		
+	}
+	if ($j(".cart-empty").length === 2) {
+		$j(".cart-empty")[1].remove();
+		$j(".cart-empty").text("Your bag is currently empty.");
+		clearInterval(cartAndQuotePoll);
+	}
+}
 
 function startGalleryPolling() {
 	currentPollInterval = setInterval(currentPoll, 500);
