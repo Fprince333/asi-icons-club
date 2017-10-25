@@ -306,24 +306,22 @@ function startGalleryPolling() {
 }
 
 function currentPoll() {
-	if ($j(".mfp-title").length && $j(".mfp-title").text().length === 0) {
+	if ($j(".mfp-title").length) {
 		initTitlePolling();
 	}
 }
 
 function initTitlePolling() {
 	let populateSku = setInterval(function(){
-		if ($j(".mfp-title").text().length === 0) {
-			let imageSrc = $j(".mfp-img").attr("src");
-			let sku = ""
-			if (imageSrc) {
-				sku = $j("img[src='" + imageSrc + "']")[1].alt;
-			} else {
-				startGalleryPolling();
-			}
-			$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");		
-			clearInterval(populateSku)
+		let imageSrc = $j(".mfp-img").attr("src");
+		let sku = ""
+		if (imageSrc) {
+			sku = $j("img[src='" + imageSrc + "']")[1].alt;
+		} else {
+			startGalleryPolling();
 		}
+		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");		
+		clearInterval(populateSku)
 	}, 500)
 }
 
