@@ -15,6 +15,8 @@ configure do
   set :email, ENV['EMAIL']
   set :password, ENV['PASSWORD']
   set :user_key, ENV['USER_KEY']
+  set :woocommerce_key, ENV['WOOCOMMERCE_KEY']
+  set :woocommerce_secret, ENV['WOOCOMMERCE_SECRET']
 end
 
 before do 
@@ -45,9 +47,9 @@ end
 
 get '/orders' do 
   woocommerce = WooCommerce::API.new(
-    "http://iconsclub.archsystems.com",
-    "ck_dd9e27db56776f8c193af83947717092c2e47a9e",
-    "cs_5b0b8e45741da23433c8213e8f5a337d00ea735b",
+    "https://iconsclub.archsystems.com",
+    woocommerce_key,
+    woocommerce_secret,
     {
       wp_api: true,
       version: "wc/v1"
