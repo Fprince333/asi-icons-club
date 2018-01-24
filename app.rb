@@ -48,8 +48,8 @@ end
 get '/orders' do 
   woocommerce = WooCommerce::API.new(
     "https://iconsclub.archsystems.com",
-    woocommerce_key,
-    woocommerce_secret,
+    settings.woocommerce_key,
+    settings.woocommerce_secret,
     {
       wp_api: true,
       version: "wc/v1"
