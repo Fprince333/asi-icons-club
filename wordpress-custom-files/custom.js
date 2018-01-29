@@ -414,11 +414,20 @@ function populateNextSlideText(e) {
 					.find('.info.portfolio_content')
 					.html()
 			);
-		$j('#fullResImage')
-			.parent()
-			.append(description);
-		description.show('slow');
+		populateText(description);
 	});
+}
+
+function populateText(text) {
+	let poll = setInterval(function(){
+		if ($j("#fullResImage").length > 0) {
+				$j("#fullResImage")
+					.parent()
+					.append(text);
+					text.show("slow");
+					clearInterval(poll);
+		}
+	}, 200);
 }
 
 function showMore(e) {
