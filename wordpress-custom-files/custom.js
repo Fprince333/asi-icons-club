@@ -110,7 +110,7 @@ $j(document).ready(function() {
 
 	if (needsToRegisterOrLogin) {
 		$j('.woocommerce-info').html(
-			"You must be a registered Icons Club Member to place an order. Please register <a href='http://iconsclub.archsystems.com/register/'>here</a>"
+			"You must be a registered Icons Club Member to place an order. Please register <a href='https://iconsclub.archsystems.com/register/'>here</a>"
 		);
 		setInterval(function() {
 			if ($j('.checkout').length > 0 && $j('.checkout').is(':visible')) {
@@ -181,7 +181,7 @@ $j(document).ready(function() {
 		setTimeout(function() {
 			restoreForm();
 		}, 15000);
-		const successMessage = `<div data-id="mpc_callout-625977837bf2f07" class="mpc-callout mpc-callout--style_2 mpc-callout-submitted mpc-inited" style="opacity: 1;"><p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class="flex-row-center"><i class="mpc-icon-part mpc-regular mpc-transition"><img width="260" height="263" src="http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png" class="attachment-full" alt=""></i></div></div>`;
+		const successMessage = `<div data-id="mpc_callout-625977837bf2f07" class="mpc-callout mpc-callout--style_2 mpc-callout-submitted mpc-inited" style="opacity: 1;"><p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class="flex-row-center"><i class="mpc-icon-part mpc-regular mpc-transition"><img width="260" height="263" src="https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png" class="attachment-full" alt=""></i></div></div>`;
 		$j('.hide-on-submit').hide();
 		$j($j('.form-container').find('.wpb_wrapper')[0]).html(successMessage);
 	}
@@ -192,7 +192,7 @@ $j(document).ready(function() {
 		}, 15000);
 		$j('.mpc-callout--style_2').addClass('mpc-callout-submitted');
 		$j('.mpc-callout--style_2').html(
-			"<p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class='flex-row-center'><i class='mpc-icon-part mpc-regular mpc-transition'><img width='260' height='263' src='http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png' class='attachment-full' alt=''></i></div>"
+			"<p>Thank you for submitting your design vision!</p><p>An ASI Material Expert will be in touch with you shortly.</p><div class='flex-row-center'><i class='mpc-icon-part mpc-regular mpc-transition'><img width='260' height='263' src='https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Artboard-1@4x-1.png' class='attachment-full' alt=''></i></div>"
 		);
 	}
 
@@ -401,9 +401,9 @@ function populateNextSlideText(e) {
 	);
 	let linkToNextPortfolioItem = '';
 	if (e.data.type === 'next') {
-		linkToNextPortfolioItem = `http://iconsclub.archsystems.com/projects/${slideNumber + 1}/`;
+		linkToNextPortfolioItem = `https://iconsclub.archsystems.com/projects/${slideNumber + 1}/`;
 	} else if (e.data.type === 'previous') {
-		linkToNextPortfolioItem = `http://iconsclub.archsystems.com/projects/${slideNumber - 1}/`;
+		linkToNextPortfolioItem = `https://iconsclub.archsystems.com/projects/${slideNumber - 1}/`;
 	}
 	let textContainer = `<div class="lightboxText"></div>`;
 	$j.get(linkToNextPortfolioItem, function(data) {
@@ -434,7 +434,7 @@ function showMore(e) {
 
 	// $appendedGallerySection.css("line-height", "0");
 
-	// const $materialChallenge = `<div class="wpb_wrapper" style="border: 2px solid #d88c2b;"><div data-id="mpc_callout-125978c26e5904d" class="mpc-callout mpc-callout--style_2 mpc-inited gallery-callout" style="opacity: 1; min-height: initial;"><div class="mpc-callout__icon-wrap mpc-icon--image" ><div class="mpc-callout__icon" style="border-radius: 50%; border: 2px solid #d88c2b; margin-top: 5px;"><i class="mpc-transition "><img width="150" height="150" src="http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-150x150.jpg" class="attachment-thumbnail" alt="" srcset="http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-150x150.jpg 150w, http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-300x300.jpg 300w, http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-600x600.jpg 600w, http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-570x570.jpg 570w, http://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-500x500.jpg 500w" sizes="(max-width: 150px) 100vw, 150px" style="width: 60px"></i></div></div><div class="mpc-callout__content"><h3 class="mpc-callout__heading" style="font-size: 10px !important">What's Your Material Challenge?</h3></div><div class="mpc-callout__button"><a href="#modal_id_59545c29a175e" target="" title="Link" data-id="mpc_button-975978c26e5918e" class="mpc-button mpc-transition mpc-inited" style="opacity: 1; overflow: inherit; padding: 5px; line-height: 1em; margin-top: 0px !important; border: 2px solid #d88c2b;"><div class="mpc-button__content mpc-effect-type--none mpc-effect-side--none"><span class="mpc-button__title mpc-transition">Let's Get Started</span></div><div class="mpc-button__background mpc-transition mpc-effect-type--fade mpc-effect-side--in"></div></a></div></div></div>`;
+	// const $materialChallenge = `<div class="wpb_wrapper" style="border: 2px solid #d88c2b;"><div data-id="mpc_callout-125978c26e5904d" class="mpc-callout mpc-callout--style_2 mpc-inited gallery-callout" style="opacity: 1; min-height: initial;"><div class="mpc-callout__icon-wrap mpc-icon--image" ><div class="mpc-callout__icon" style="border-radius: 50%; border: 2px solid #d88c2b; margin-top: 5px;"><i class="mpc-transition "><img width="150" height="150" src="https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-150x150.jpg" class="attachment-thumbnail" alt="" srcset="https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-150x150.jpg 150w, https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-300x300.jpg 300w, https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-600x600.jpg 600w, https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-570x570.jpg 570w, https://iconsclub.archsystems.com/wp-content/uploads/2016/06/Emerald-500x500.jpg 500w" sizes="(max-width: 150px) 100vw, 150px" style="width: 60px"></i></div></div><div class="mpc-callout__content"><h3 class="mpc-callout__heading" style="font-size: 10px !important">What's Your Material Challenge?</h3></div><div class="mpc-callout__button"><a href="#modal_id_59545c29a175e" target="" title="Link" data-id="mpc_button-975978c26e5918e" class="mpc-button mpc-transition mpc-inited" style="opacity: 1; overflow: inherit; padding: 5px; line-height: 1em; margin-top: 0px !important; border: 2px solid #d88c2b;"><div class="mpc-button__content mpc-effect-type--none mpc-effect-side--none"><span class="mpc-button__title mpc-transition">Let's Get Started</span></div><div class="mpc-button__background mpc-transition mpc-effect-type--fade mpc-effect-side--in"></div></a></div></div></div>`;
 
 	// $appendedGallerySection.html($materialChallenge);
 }
