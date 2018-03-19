@@ -69,8 +69,6 @@ $j(document).ready(function () {
 	$j(".material-gallery .mpc-item").on("click", function (e) {
 		var sku = $j($j(e.currentTarget).find("img")[0]).attr("alt");
 		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");
-		initTitlePolling();
-		startGalleryPolling();
 	});
 
 	if (hasScrollButton) {
@@ -279,28 +277,10 @@ function removeCartAndQuotes() {
 	}
 }
 
-function startGalleryPolling() {
-	currentPollInterval = setInterval(currentPoll, 500);
-}
-
 function currentPoll() {
 	if ($j(".mfp-title").length) {
 		initTitlePolling();
 	}
-}
-
-function initTitlePolling() {
-	var populateSku = setInterval(function () {
-		var imageSrc = $j(".mfp-img").attr("src");
-		var sku = "";
-		if (imageSrc) {
-			sku = $j("img[src='" + imageSrc + "']")[1].alt;
-		} else {
-			startGalleryPolling();
-		}
-		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");
-		clearInterval(populateSku);
-	}, 500);
 }
 
 function restoreForm() {
@@ -366,13 +346,6 @@ function showMore(e) {
 	e.preventDefault();
 	$j(this).hide();
 	$j('article.mix:gt(7)').show();
-}
-
-function playYouTubeVideo() {
-	var youTubeIframe = '<iframe width="620" height="480" src="https://www.youtube.com/embed/0c0stsGBtnM?autoplay=1" frameborder="0" allowfullscreen></iframe>';
-	$j('.yt-hutchinson').find('.mpc-icon').css('border-radius', '0');
-	$j('.yt-hutchinson').find('.mpc-icon').css('border', 'none');
-	$j('.yt-hutchinson').find('.mpc-icon').html(youTubeIframe);
 }
 
 function linkToYouTubeVideoOfHutch() {
