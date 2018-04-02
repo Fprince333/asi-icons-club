@@ -1,0 +1,144 @@
+.center {
+  text-align: center;
+  position: sticky;
+  margin: auto;
+  display: table;
+}
+
+a.all_sort_button.active_sort,
+a.all_sort_button.active_sort+span {
+  display: none;
+}
+
+.mpc-block-scroll header {
+  z-index: 100;
+}
+
+.separator {
+  height: 5px !important;
+  margin-top: 20px !important;
+}
+
+.mpc-callout__icon {
+  overflow: hidden;
+}
+
+ul.buzz {
+  list-style-position: outside;
+  padding-left: 25px;
+  line-height: 2em;
+  margin-left: 8%;
+}
+
+ul.buzz {
+  list-style: none;
+  padding: 10px;
+  text-indent: -20px;
+}
+
+ul.buzz li:before {
+  content: '✓';
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 971px) {
+  .rev-btn {
+    width: 142px;
+    font-size: 12px !important;
+    padding: 12px 10px !important;
+  }
+}
+
+.tp-mask-wrap {
+  left: 230px;
+  top: 105px;
+  text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+  .tp-mask-wrap {
+    left: 150px !important;
+    top: 105px;
+    text-align: center;
+  }
+  .rev-btn {
+    width: 115px;
+    font-size: 10px !important;
+    padding: 10px 0px !important;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .tp-mask-wrap {
+    left: 300px;
+    top: 150px;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .tp-mask-wrap {
+    left: 300px;
+    top: 175px;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .tp-mask-wrap {
+    left: 365px;
+    top: 200px;
+  }
+}
+
+.slick-slider {
+  min-height: 100px !important;
+}
+
+.basics {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.installed {
+  text-align: center;
+  margin-top: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .basics {
+    text-align: right;
+  }
+  .installed {
+    text-align: left;
+  }
+}
+
+.button-group .mpc-button {
+  margin-top: 0px !important;
+}
+
+.buzz span {
+  font-size: 18pt !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .buzz span {
+    font-size: 12pt !important;
+  }
+}
+
+.flex-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 195px;
+}
+
+.double-line-height {
+  line-height: 2em;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .material-gallery {
+    height: 356px !important;
+  }
+}
