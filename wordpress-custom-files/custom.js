@@ -67,8 +67,15 @@ $j(document).ready(function () {
 	});
 
 	$j(".material-gallery .mpc-item").on("click", function (e) {
-		var sku = $j($j(e.currentTarget).find("img")[0]).attr("alt");
-		$j(".mfp-title").html("<p style='color: white;'>" + sku + "</p>");
+		$j(".mpc-magnific-popup").on("mfpChange", function(){
+			$j(".material-gallery img").each(function(i, el) {
+				if (el.srcset.includes($j.magnificPopup.instance.currItem.src)) {
+					waitForEl(".mfp-title", function(){
+						$j(".mfp-title").html("<p style='color: white;'>" + el.alt + "</p>");
+					})
+				}
+			});
+		});
 	});
 
 	if (hasScrollButton) {
