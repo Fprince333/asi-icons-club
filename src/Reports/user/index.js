@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Paper from "material-ui/Paper";
+import Skeleton from 'react-loading-skeleton';
 import {
   Table,
   TableBody,
@@ -17,9 +18,12 @@ class UserReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: { prospect: [""], total_results: "Loading..." },
-      leader: "Loading...",
-      totalOrders: "Loading...",
+      data: {
+        prospect: [""],
+        total_results: null
+      },
+      leader: null,
+      totalOrders: null,
       gaData: {}
     };
   }
@@ -131,7 +135,7 @@ class UserReport extends Component {
               return null;
             }
           }).length
-      : "Loading...";
+      : <Skeleton/>;
 
     const body = this.state.data.prospect.length > 1
       ? this.state.data.prospect
@@ -182,7 +186,7 @@ class UserReport extends Component {
               </TableRow>
             );
           })
-      : null;
+      : <Skeleton />;
     const leaderboardBody = this.state.leaderboard
       ? this.state.leaderboard.map((person, index) => {
           return (
@@ -195,14 +199,14 @@ class UserReport extends Component {
             </TableRow>
           );
         })
-      : null;
+      : <Skeleton />;
     const sessionMinutes = this.state.gaData.totalsForAllResults
       ? (this.state.gaData.totalsForAllResults["ga:sessionDuration"] /
           this.state.gaData.totalsForAllResults["ga:sessions"] /
           60)
           .toString()
           .split(".")[0]
-      : null;
+      : <Skeleton />;
     const sessionSeconds = this.state.gaData.totalsForAllResults
       ? (this.state.gaData.totalsForAllResults["ga:sessionDuration"] /
           this.state.gaData.totalsForAllResults["ga:sessions"] /
@@ -210,7 +214,7 @@ class UserReport extends Component {
           .toString()
           .split(".")[1]
           .substring(0, 2)
-      : null;
+      : <Skeleton />;
     const paperStyle = {
       height: 150,
       width: 150,
@@ -232,7 +236,7 @@ class UserReport extends Component {
               circle={true}
               children={
                 <div>
-                  <h3 style={{ margin: 0 }}>{totalMembers}</h3> <p>View All</p>
+                  <h3 style={{ margin: 20 }}>{totalMembers} </h3>
                 </div>
               }
               onClick={this.showUsers}
@@ -241,7 +245,6 @@ class UserReport extends Component {
           <Card style={{ padding: "10px", margin: "10px" }}>
             <h2>
               Leader
-              {" "}
               {this.state.leaderTotal ? ": " + this.state.leaderTotal : null}
             </h2>
             <Paper
@@ -250,8 +253,7 @@ class UserReport extends Component {
               circle={true}
               children={
                 <div>
-                  <h3 style={{ margin: 0 }}>{this.state.leader}</h3>
-                  <p style={{ marginTop: 5 }}>View Leaderboard</p>
+                  <h3 style={{ margin: 20 }}>{this.state.leader ? this.state.leader : <Skeleton />}</h3>
                 </div>
               }
               onClick={this.showLeaderboard}
@@ -265,7 +267,7 @@ class UserReport extends Component {
               circle={true}
               children={
                 <div>
-                  <h3 style={{ margin: 0 }}>{this.state.totalOrders}</h3>
+                  <h3 style={{ margin: 20 }}>{this.state.totalOrders ? this.state.totalOrders : <Skeleton />}</h3>
                 </div>
               }
             />
@@ -290,7 +292,7 @@ class UserReport extends Component {
                         {" "}
                         Seconds
                       </h3>
-                    : <h3 style={{ margin: 0 }}>Loading...</h3>}
+                    : <div style={{ margin: 20 }}><Skeleton count={2} /> </div>}
                 </div>
               }
             />
