@@ -5,7 +5,6 @@ import {
   Table,
   TableBody,
   TableHeader,
-  TableHeaderColumn,
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
@@ -16,6 +15,7 @@ import TotalUsers from "../components/TotalUsers";
 import Leader from "../components/Leader";
 import Orders from "../components/TotalOrders";
 import AvgSessionLength from "../components/AvgSessionLength";
+import LeaderBoard from "../components/LeaderBoard";
 
 class UserReport extends Component {
   constructor(props) {
@@ -181,19 +181,6 @@ class UserReport extends Component {
             );
           })
       : <Skeleton />;
-    const leaderboardBody = this.state.leaderInfo
-      ? this.state.leaderInfo.leaderboard.map((person, index) => {
-          return (
-            <TableRow key={index}>
-              <TableRowColumn>{index + 1}</TableRowColumn>
-              <TableRowColumn>{person}</TableRowColumn>
-              <TableRowColumn>
-                {this.state.leaderInfo.leaderboardObject[person]}
-              </TableRowColumn>
-            </TableRow>
-          );
-        })
-      : null;
     const paperStyle = {
       height: 150,
       width: 150,
@@ -215,16 +202,18 @@ class UserReport extends Component {
         <div style={{margin: "20px 0"}}>
           <RaisedButton label="Leader Board" onClick={this.showLeaderboard} backgroundColor="#d88c2b" labelColor="#ffffff" />
         </div>
-        <Table className="leaderboard" style={{ display: "none" }}>
+        <LeaderBoard info={this.state.leaderInfo} />
+        <Table className="usersTable" style={{ display: "none" }}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableRow>
-              <TableHeaderColumn> </TableHeaderColumn>
-              <TableHeaderColumn> Name</TableHeaderColumn>
-              <TableHeaderColumn> Members </TableHeaderColumn>
-            </TableRow>
+            <Header
+              onCellClick={event => {
+                this.sortByColumn(event);
+              }}
+              columns={this.state.data.prospect[0]}
+            />
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            {leaderboardBody}
+            {body}
           </TableBody>
         </Table>
       </div>
