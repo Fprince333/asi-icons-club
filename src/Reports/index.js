@@ -4,7 +4,7 @@ import UserReport from "./user";
 class Reports extends React.Component {
   render() {
     return (
-      <div>
+      <div style={{maxWidth: "1200px", margin: "0 auto"}}>
         <UserReport />
       </div>
     );

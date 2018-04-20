@@ -9,6 +9,7 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
+import RaisedButton from 'material-ui/RaisedButton';
 
 import Header from "./list/header";
 import TotalUsers from "../components/TotalUsers";
@@ -180,19 +181,19 @@ class UserReport extends Component {
             );
           })
       : <Skeleton />;
-    const leaderboardBody = this.state.leaderboard
-      ? this.state.leaderboard.map((person, index) => {
+    const leaderboardBody = this.state.leaderInfo
+      ? this.state.leaderInfo.leaderboard.map((person, index) => {
           return (
             <TableRow key={index}>
               <TableRowColumn>{index + 1}</TableRowColumn>
               <TableRowColumn>{person}</TableRowColumn>
               <TableRowColumn>
-                {this.state.leaderboardObject[person]}
+                {this.state.leaderInfo.leaderboardObject[person]}
               </TableRowColumn>
             </TableRow>
           );
         })
-      : <Skeleton />;
+      : null;
     const paperStyle = {
       height: 150,
       width: 150,
@@ -211,19 +212,9 @@ class UserReport extends Component {
           <Orders total={this.state.totalOrders} style={paperStyle} />
           <AvgSessionLength gaData={this.state.gaData} style={paperStyle} />
         </div>
-        <Table className="usersTable" style={{ display: "none" }}>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <Header
-              onCellClick={event => {
-                this.sortByColumn(event);
-              }}
-              columns={this.state.data.prospect[0]}
-            />
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-            {body}
-          </TableBody>
-        </Table>
+        <div style={{margin: "20px 0"}}>
+          <RaisedButton label="Leader Board" onClick={this.showLeaderboard} backgroundColor="#d88c2b" labelColor="#ffffff" />
+        </div>
         <Table className="leaderboard" style={{ display: "none" }}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
