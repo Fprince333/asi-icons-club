@@ -2,7 +2,7 @@
   "name": "metrics",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://mean-gold.surge.sh/",
+  "homepage": "https://iconsclub-metrics.surge.sh/",
   "dependencies": {
     "axios": "^0.16.2",
     "gravity-forms-api": "0.0.9",
@@ -21,7 +21,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "yarn run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "deploy": "yarn run build && surge -p build -d mean-gold.surge.sh",
+    "deploy": "yarn run build && surge -p build -d iconsclub-metrics.surge.sh",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
