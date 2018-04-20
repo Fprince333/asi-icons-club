@@ -1,21 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Skeleton from 'react-loading-skeleton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableRow,
-  TableRowColumn
-} from "material-ui/Table";
 import RaisedButton from 'material-ui/RaisedButton';
 
-import Header from "./list/header";
 import TotalUsers from "../components/TotalUsers";
 import Leader from "../components/Leader";
 import Orders from "../components/TotalOrders";
 import AvgSessionLength from "../components/AvgSessionLength";
 import LeaderBoard from "../components/LeaderBoard";
+import UsersTable from "../components/UsersTable/index";
 
 class UserReport extends Component {
   constructor(props) {
@@ -107,80 +99,7 @@ class UserReport extends Component {
     });
   }
 
-  sortByColumn(event) {
-    const sortProperty = event.target.dataset.id;
-    const sortedData = this.state.data.prospect.sort(function(a, b) {
-      if (a[sortProperty] && b[sortProperty]) {
-        let typeA = a[sortProperty].toUpperCase();
-        let typeB = b[sortProperty].toUpperCase();
-        if (typeA < typeB) {
-          return -1;
-        }
-        if (typeA > typeB) {
-          return 1;
-        }
-      }
-      return 0;
-    });
-    this.setState({
-      data: {
-        prospect: sortedData,
-        total_results: this.state.data.total_results
-      }
-    });
-  }
-
   render() {
-    const body = this.state.data.prospect.length > 1
-      ? this.state.data.prospect
-          .filter(member => {
-            if (member.company) {
-              return !member.company.includes("Architectural Systems");
-            } else {
-              return null;
-            }
-          })
-          .map(prospect => {
-            let rowBody = Object.keys(prospect).map(key => {
-              switch (key) {
-                case "first_name":
-                  return (
-                    <TableRowColumn key={key}>
-                      {prospect[key] + " " + prospect["last_name"]}
-                    </TableRowColumn>
-                  );
-
-                case "email":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
-
-                case "company":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
-
-                case "job_title":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
-
-                case "Account_Executive":
-                  return (
-                    <TableRowColumn key={key}>{prospect[key]}</TableRowColumn>
-                  );
-
-                default:
-                  return null;
-              }
-            });
-            return (
-              <TableRow key={prospect.id ? prospect.id : 42}>
-                {rowBody}
-              </TableRow>
-            );
-          })
-      : <Skeleton />;
     const paperStyle = {
       height: 150,
       width: 150,
@@ -200,22 +119,11 @@ class UserReport extends Component {
           <AvgSessionLength gaData={this.state.gaData} style={paperStyle} />
         </div>
         <div style={{margin: "20px 0"}}>
-          <RaisedButton label="Leader Board" onClick={this.showLeaderboard} backgroundColor="#d88c2b" labelColor="#ffffff" />
+          <RaisedButton label="Leader Board" onClick={this.showLeaderboard} backgroundColor="#d88c2b" labelColor="#ffffff" style={{margin: "12px"}}/>
+          <RaisedButton label="Users" onClick={this.showUsers} backgroundColor="#000000" labelColor="#ffffff" style={{margin: "12px"}}/>
         </div>
         <LeaderBoard info={this.state.leaderInfo} />
-        <Table className="usersTable" style={{ display: "none" }}>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <Header
-              onCellClick={event => {
-                this.sortByColumn(event);
-              }}
-              columns={this.state.data.prospect[0]}
-            />
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-            {body}
-          </TableBody>
-        </Table>
+        <UsersTable users={this.state.data} />
       </div>
     );
   }
