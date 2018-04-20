@@ -13,6 +13,7 @@ import {
 import { Card } from "material-ui/Card";
 
 import Header from "./list/header";
+import TotalUsers from "../components/TotalUsers";
 
 class UserReport extends Component {
   constructor(props) {
@@ -126,17 +127,6 @@ class UserReport extends Component {
   }
 
   render() {
-    const totalMembers = this.state.data.prospect.length > 1
-      ? this.state.data.total_results -
-          this.state.data.prospect.filter(member => {
-            if (member.company) {
-              return member.company.includes("Architectural Systems");
-            } else {
-              return null;
-            }
-          }).length
-      : <Skeleton/>;
-
     const body = this.state.data.prospect.length > 1
       ? this.state.data.prospect
           .filter(member => {
@@ -228,20 +218,7 @@ class UserReport extends Component {
     return (
       <div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Card style={{ padding: "10px", margin: "10px" }}>
-            <h2>Total Users </h2>
-            <Paper
-              style={paperStyle}
-              zDepth={3}
-              circle={true}
-              children={
-                <div>
-                  <h3 style={{ margin: 20 }}>{totalMembers} </h3>
-                </div>
-              }
-              onClick={this.showUsers}
-            />
-          </Card>
+          <TotalUsers total={this.state.data} style={paperStyle}/>
           <Card style={{ padding: "10px", margin: "10px" }}>
             <h2>
               Leader
