@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Paper from "material-ui/Paper";
 import Skeleton from 'react-loading-skeleton';
 import {
   Table,
@@ -10,11 +9,12 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
-import { Card } from "material-ui/Card";
 
 import Header from "./list/header";
 import TotalUsers from "../components/TotalUsers";
 import Leader from "../components/Leader";
+import Orders from "../components/TotalOrders";
+import AvgSessionLength from "../components/AvgSessionLength";
 
 class UserReport extends Component {
   constructor(props) {
@@ -193,21 +193,6 @@ class UserReport extends Component {
           );
         })
       : <Skeleton />;
-    const sessionMinutes = this.state.gaData.totalsForAllResults
-      ? (this.state.gaData.totalsForAllResults["ga:sessionDuration"] /
-          this.state.gaData.totalsForAllResults["ga:sessions"] /
-          60)
-          .toString()
-          .split(".")[0]
-      : <Skeleton />;
-    const sessionSeconds = this.state.gaData.totalsForAllResults
-      ? (this.state.gaData.totalsForAllResults["ga:sessionDuration"] /
-          this.state.gaData.totalsForAllResults["ga:sessions"] /
-          60)
-          .toString()
-          .split(".")[1]
-          .substring(0, 2)
-      : <Skeleton />;
     const paperStyle = {
       height: 150,
       width: 150,
@@ -223,44 +208,8 @@ class UserReport extends Component {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <TotalUsers total={this.state.data} style={paperStyle}/>
           <Leader info={this.state.leaderInfo} style={paperStyle}/>
-          <Card style={{ padding: "10px", margin: "10px" }}>
-            <h2>Total Orders </h2>
-            <Paper
-              style={paperStyle}
-              zDepth={3}
-              circle={true}
-              children={
-                <div>
-                  <h3 style={{ margin: 20 }}>{this.state.totalOrders ? this.state.totalOrders : <Skeleton />}</h3>
-                </div>
-              }
-            />
-          </Card>
-          <Card style={{ padding: "10px", margin: "10px" }}>
-            <h2>Avg. Session Length </h2>
-            <Paper
-              style={paperStyle}
-              zDepth={3}
-              circle={true}
-              children={
-                <div>
-                  {this.state.gaData.totalsForAllResults
-                    ? <h3 style={{ margin: 0 }}>
-                        {sessionMinutes}
-                        {" "}
-                        Minutes and
-                        {" "}
-                        <br />
-                        {" "}
-                        {sessionSeconds}
-                        {" "}
-                        Seconds
-                      </h3>
-                    : <div style={{ margin: 20 }}><Skeleton count={2} /> </div>}
-                </div>
-              }
-            />
-          </Card>
+          <Orders total={this.state.totalOrders} style={paperStyle} />
+          <AvgSessionLength gaData={this.state.gaData} style={paperStyle} />
         </div>
         <Table className="usersTable" style={{ display: "none" }}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
