@@ -14,6 +14,7 @@ import { Card } from "material-ui/Card";
 
 import Header from "./list/header";
 import TotalUsers from "../components/TotalUsers";
+import Leader from "../components/Leader";
 
 class UserReport extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class UserReport extends Component {
         prospect: [""],
         total_results: null
       },
-      leader: null,
+      leaderInfo: null,
       totalOrders: null,
       gaData: {}
     };
@@ -76,10 +77,12 @@ class UserReport extends Component {
             return leaderboard[b] - leaderboard[a];
           });
           this.setState({
-            leader: leader,
-            leaderTotal: leaderboard[leader],
-            leaderboard: sortedLeaderboard,
-            leaderboardObject: leaderboard
+            leaderInfo: {
+              leader: leader,
+              leaderTotal: leaderboard[leader],
+              leaderboard: sortedLeaderboard,
+              leaderboardObject: leaderboard
+            }
           });
         }
       });
@@ -219,23 +222,7 @@ class UserReport extends Component {
       <div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <TotalUsers total={this.state.data} style={paperStyle}/>
-          <Card style={{ padding: "10px", margin: "10px" }}>
-            <h2>
-              Leader
-              {this.state.leaderTotal ? ": " + this.state.leaderTotal : null}
-            </h2>
-            <Paper
-              style={paperStyle}
-              zDepth={3}
-              circle={true}
-              children={
-                <div>
-                  <h3 style={{ margin: 20 }}>{this.state.leader ? this.state.leader : <Skeleton />}</h3>
-                </div>
-              }
-              onClick={this.showLeaderboard}
-            />
-          </Card>
+          <Leader info={this.state.leaderInfo} style={paperStyle}/>
           <Card style={{ padding: "10px", margin: "10px" }}>
             <h2>Total Orders </h2>
             <Paper
