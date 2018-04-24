@@ -10,28 +10,6 @@ import {
 import Header from "./Header";
 
 const UsersTable = (props) => {
-  const sortByColumn = (event) => {
-    const sortProperty = event.target.dataset.id;
-    props.users.prospect.sort(function(a, b) {
-      if (a[sortProperty] && b[sortProperty]) {
-        let typeA = a[sortProperty].toUpperCase();
-        let typeB = b[sortProperty].toUpperCase();
-        if (typeA < typeB) {
-          return -1;
-        }
-        if (typeA > typeB) {
-          return 1;
-        }
-      }
-      return 0;
-    });
-    // this.setState({
-    //   data: {
-    //     prospect: sortedData,
-    //     total_results: props.users.total_results
-    //   }
-    // });
-  }
   const body = props.users.prospect.length > 1
     ? props.users.prospect
         .filter(member => {
@@ -87,7 +65,7 @@ const UsersTable = (props) => {
       <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
         <Header
           onCellClick={event => {
-            sortByColumn(event);
+            props.sortByColumn(event);
           }}
           columns={props.users.prospect[0]}
         />

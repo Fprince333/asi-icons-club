@@ -99,6 +99,29 @@ class UserReport extends Component {
     });
   }
 
+  sortByColumn(event) {
+    const sortProperty = event.target.dataset.id;
+    const sortedData = this.state.data.prospect.sort(function(a, b) {
+      if (a[sortProperty] && b[sortProperty]) {
+        let typeA = a[sortProperty].toUpperCase();
+        let typeB = b[sortProperty].toUpperCase();
+        if (typeA < typeB) {
+          return -1;
+        }
+        if (typeA > typeB) {
+          return 1;
+        }
+      }
+      return 0;
+    });
+    this.setState({
+      data: {
+        prospect: sortedData,
+        total_results: this.state.data.total_results
+      }
+    });
+  }
+
   render() {
     const paperStyle = {
       height: 150,
@@ -123,7 +146,7 @@ class UserReport extends Component {
           <RaisedButton label="Users" onClick={this.showUsers} backgroundColor="#000000" labelColor="#ffffff" style={{margin: "12px"}}/>
         </div>
         <LeaderBoard info={this.state.leaderInfo} />
-        <UsersTable users={this.state.data} />
+        <UsersTable users={this.state.data} sortByColumn={this.sortByColumn.bind(this)}/>
       </div>
     );
   }

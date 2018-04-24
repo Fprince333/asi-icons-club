@@ -43,6 +43,6 @@ const Header = props => {
         return null;
     }
   });
-  return <TableRow onCellClick={props.onCellClick}> {headers}</TableRow>;
+  return <TableRow style={{cursor: "pointer"}}onCellClick={props.onCellClick}> {headers}</TableRow>;
 };
 export default Header;
