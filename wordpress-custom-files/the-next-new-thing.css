@@ -137,8 +137,18 @@ ul.buzz li:before {
   line-height: 2em;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+.material-gallery {
+  height: 450px;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
   .material-gallery {
-    height: 356px !important;
+    height: 357px !important;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .material-gallery {
+    height: 403px !important;
   }
 }
